@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-02T00:00:00Z",
+  "title": "Design System: Limonada Landing",
+  "extensions": {
+    "colorMeta": {
+      "ink-yellow": { "role": "primary", "displayName": "Tinta Amarillo Fluo", "canonical": "#F5C518", "tonalRamp": ["#3D3102", "#6B5604", "#997B06", "#C7A008", "#F5C518", "#F8D354", "#FBE28F", "#FDF0CA"] },
+      "gold-pass": { "role": "primary", "displayName": "Pasada Dorada (solo decorativa)", "canonical": "#D4A800", "tonalRamp": ["#352A00", "#5F4C00", "#8A6E00", "#B48F00", "#D4A800", "#E0BE40", "#EBD480", "#F6EABF"] },
+      "ink-black": { "role": "primary", "displayName": "Tinta Negra", "canonical": "#111111", "tonalRamp": ["#000000", "#111111", "#333333", "#555555", "#777777", "#999999", "#BBBBBB", "#DDDDDD"] },
+      "paper": { "role": "neutral", "displayName": "Papel", "canonical": "#F8F1DE", "tonalRamp": ["#3E3C37", "#6B675C", "#979181", "#C4BDA8", "#F8F1DE", "#FAF4E5", "#FCF8EE", "#FEFCF7"] },
+      "paper-deep": { "role": "neutral", "displayName": "Papel Hundido", "canonical": "#F0E6C8", "tonalRamp": ["#3C3A32", "#685F50", "#94876E", "#C0B08C", "#F0E6C8", "#F3EBD3", "#F7F0DF", "#FBF6EB"] },
+      "card-white": { "role": "neutral", "displayName": "Papel de Recibo", "canonical": "#FFFDF4", "tonalRamp": ["#403F3D", "#6C6A66", "#98958F", "#C4C1B8", "#E8E5DC", "#F2EFE6", "#F9F7EE", "#FFFDF4"] },
+      "ink-body": { "role": "neutral", "displayName": "Tinta de Cuerpo", "canonical": "#3B3629", "tonalRamp": ["#13110D", "#27241B", "#3B3629", "#5F5742", "#837860", "#A79A82", "#CBBFA9", "#EFE5D4"] },
+      "gold-text": { "role": "neutral", "displayName": "Dorado Legible (texto)", "canonical": "#7A5A06", "tonalRamp": ["#1F1602", "#3D2D03", "#5C4404", "#7A5A06", "#9E7508", "#C2900A", "#E0B23C", "#F0D492"] },
+      "stamp-green": { "role": "tertiary", "displayName": "Verde Sello", "canonical": "#0E7A55", "tonalRamp": ["#042418", "#084527", "#0E7A55", "#14A873", "#3BC08F", "#6ED3AB", "#A1E4C8", "#D4F4E4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titular del hero: Poppins 800 UPPERCASE con desregistro .misreg, máx 11ch." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección, máx 20ch; el cierre escala a clamp(2.6rem, 7vw, 4.6rem)." },
+      "body": { "displayName": "Body", "purpose": "Open Sans 16.5px/1.6 en #3B3629; sobre tinta amarilla sube a peso 600." },
+      "label": { "displayName": "Label", "purpose": "Nav, sellos, stamps y captions: UPPERCASE con tracking 0.05–0.1em; sobre claro en #7A5A06 cuando es dorado." }
+    },
+    "shadows": [
+      { "name": "shadow-reg", "value": "5px 5px 0 #111111", "purpose": "Sombra de registro en reposo: botones ticket y piezas de papel sobre fondo claro/amarillo. Token --shadow-reg." },
+      { "name": "shadow-reg-hover", "value": "8px 8px 0 #111111", "purpose": "Hover: el elemento se despega con translate(-2px,-2px)." },
+      { "name": "shadow-reg-active", "value": "1px 1px 0 #111111", "purpose": "Active: se aplasta con translate(3px,3px)." },
+      { "name": "shadow-reg-gold", "value": "5px 5px 0 #D4A800", "purpose": "Registro dorado para botones sobre campo negro (hover 8–9px)." },
+      { "name": "shadow-card-demo", "value": "7px 7px 0 #D4A800", "purpose": "Agenda demo montada sobre campo amarillo." }
+    ],
+    "motion": [
+      { "name": "t", "value": "200ms cubic-bezier(0.22, 0.9, 0.35, 1)", "purpose": "Transición estándar de despegue/aplastado y hovers. Token --t." },
+      { "name": "settle", "value": "700ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "La pasada desregistrada 'asienta' de translate(18px,14px) a (6px,5px) al cargar. Anulada por prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "520px" },
+      { "name": "md", "value": "860px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón Ticket (primario)",
+      "kind": "button",
+      "refersTo": "button-ticket",
+      "description": "CTA principal: ticket amarillo con borde 2px y sombra de registro; despega en hover, se aplasta en active.",
+      "html": "<a href=\"#\" class=\"ds-btn-ticket\">Empezar gratis · 14 días</a>",
+      "css": ".ds-btn-ticket { display: inline-block; font-family: 'Poppins', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; font-size: 15px; text-decoration: none; padding: 15px 30px; border: 2px solid #111111; background: #F5C518; color: #111111; box-shadow: 5px 5px 0 #111111; cursor: pointer; transition: transform 200ms cubic-bezier(.22,.9,.35,1), box-shadow 200ms cubic-bezier(.22,.9,.35,1); } .ds-btn-ticket:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 #111111; } .ds-btn-ticket:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 #111111; } .ds-btn-ticket:focus-visible { outline: 3px solid #111111; outline-offset: 3px; }"
+    },
+    {
+      "name": "Botón Línea (secundario)",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Secundario transparente con borde negro; hover invierte a tinta negra plena.",
+      "html": "<a href=\"#\" class=\"ds-btn-line\">Hablar con ventas</a>",
+      "css": ".ds-btn-line { display: inline-block; font-family: 'Poppins', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; font-size: 15px; text-decoration: none; padding: 15px 30px; border: 2px solid #111111; background: transparent; color: #111111; cursor: pointer; transition: background 200ms cubic-bezier(.22,.9,.35,1), color 200ms cubic-bezier(.22,.9,.35,1); } .ds-btn-line:hover { background: #111111; color: #F8F1DE; } .ds-btn-line:focus-visible { outline: 3px solid #111111; outline-offset: 3px; }"
+    },
+    {
+      "name": "Link de Navegación",
+      "kind": "nav",
+      "description": "Link del masthead: Poppins 600 UPPERCASE con subrayado 2px que aparece dorado en hover.",
+      "html": "<a href=\"#\" class=\"ds-nav-link\">Funcionalidades</a>",
+      "css": ".ds-nav-link { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13.5px; text-transform: uppercase; letter-spacing: .05em; text-decoration: none; color: #111111; border-bottom: 2px solid transparent; padding-bottom: 2px; cursor: pointer; transition: border-color 200ms cubic-bezier(.22,.9,.35,1); } .ds-nav-link:hover { border-color: #D4A800; } .ds-nav-link:focus-visible { outline: 3px solid #111111; outline-offset: 3px; }"
+    },
+    {
+      "name": "Sello de Goma (estados)",
+      "kind": "chip",
+      "refersTo": "sello-wait",
+      "description": "Chip de estado tipo sello: rotado -3°, borde 1.5px currentColor. Variantes ok (verde), wait (amarillo) y done (apagado).",
+      "html": "<span class=\"ds-sello ds-sello-ok\">Confirmado</span> <span class=\"ds-sello ds-sello-wait\">Pendiente</span> <span class=\"ds-sello ds-sello-done\">Completado</span>",
+      "css": ".ds-sello { display: inline-block; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .09em; text-transform: uppercase; padding: 4px 9px; border: 1.5px solid currentColor; transform: rotate(-3deg); white-space: nowrap; margin-right: 10px; } .ds-sello-ok { color: #0E7A55; } .ds-sello-wait { color: #111111; background: #F5C518; border-color: #111111; } .ds-sello-done { color: #3B3629; opacity: .6; }"
+    },
+    {
+      "name": "Titular Desregistrado",
+      "kind": "custom",
+      "description": "Firma del mundo: pasada amarilla corrida 6px/5px bajo el titular negro Poppins 800 caps.",
+      "html": "<h2 class=\"ds-misreg-h\"><span class=\"ds-misreg\" data-text=\"Tu agenda\"><span>Tu agenda</span></span></h2>",
+      "css": ".ds-misreg-h { font-family: 'Poppins', sans-serif; font-weight: 800; text-transform: uppercase; line-height: .95; letter-spacing: -.02em; color: #111111; font-size: clamp(2rem, 5vw, 3.4rem); } .ds-misreg { position: relative; display: inline-block; } .ds-misreg > span { position: relative; z-index: 2; } .ds-misreg::before { content: attr(data-text); position: absolute; inset: 0; z-index: 1; color: #F5C518; transform: translate(6px, 5px); }"
+    },
+    {
+      "name": "Ticket Troquelado",
+      "kind": "card",
+      "description": "Un tramo de la tira de tickets del hero: borde 2px, troquel dashed a la derecha, número de paso en dorado legible.",
+      "html": "<div class=\"ds-stub\"><div class=\"ds-stub-step\">1</div><h3 class=\"ds-stub-title\">Elige el servicio</h3><p class=\"ds-stub-p\">De tu lista, con duración y precio a la vista.</p></div>",
+      "css": ".ds-stub { background: #F8F1DE; border: 2px solid #111111; border-right: 2px dashed #111111; padding: 22px 20px 26px; max-width: 260px; transition: transform 200ms cubic-bezier(.22,.9,.35,1); } .ds-stub:hover { transform: translateY(-4px); } .ds-stub-step { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 32px; color: #7A5A06; line-height: 1; } .ds-stub-title { font-family: 'Poppins', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 15px; margin: 10px 0 6px; color: #111111; line-height: .95; letter-spacing: -.02em; } .ds-stub-p { font-family: 'Open Sans', sans-serif; font-size: 13.5px; line-height: 1.45; color: #3B3629; margin: 0; }"
+    },
+    {
+      "name": "Tarjeta de Tarifa (destacada)",
+      "kind": "card",
+      "refersTo": "card-paper",
+      "description": "Pieza de papel montada: la destacada va en tinta amarilla, rotada -0.6°, con sombra de registro en reposo y stamp negro.",
+      "html": "<div class=\"ds-tarifa\"><span class=\"ds-stamp\">Más popular</span><h3 class=\"ds-tarifa-h\">Pro</h3><div class=\"ds-tarifa-precio\">$24.300<small>/mes</small></div><p class=\"ds-tarifa-p\">Para negocios en crecimiento.</p></div>",
+      "css": ".ds-tarifa { position: relative; background: #F5C518; border: 2px solid #111111; box-shadow: 5px 5px 0 #111111; transform: rotate(-.6deg); padding: 30px 26px; max-width: 300px; margin-top: 20px; transition: transform 200ms cubic-bezier(.22,.9,.35,1), box-shadow 200ms cubic-bezier(.22,.9,.35,1); } .ds-tarifa:hover { transform: rotate(-.6deg) translate(-2px,-2px); box-shadow: 8px 8px 0 #111111; } .ds-stamp { position: absolute; top: -16px; right: 18px; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; background: #111111; color: #F5C518; padding: 6px 12px; transform: rotate(3deg); } .ds-tarifa-h { font-family: 'Poppins', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 20px; color: #111111; margin: 0; line-height: .95; } .ds-tarifa-precio { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 42px; color: #111111; line-height: 1.1; margin: 12px 0 2px; letter-spacing: -.02em; } .ds-tarifa-precio small { font-size: 15px; font-weight: 700; letter-spacing: 0; } .ds-tarifa-p { font-family: 'Open Sans', sans-serif; font-size: 13.5px; color: #111111; margin: 0; }"
+    },
+    {
+      "name": "Fila de Funcionalidad (puntos líder)",
+      "kind": "custom",
+      "description": "Renglón de lista de precios de imprenta: nombre en caps con puntos líder dorados y divisor dotted.",
+      "html": "<div class=\"ds-func\"><div class=\"ds-func-name\">Agenda inteligente</div><p class=\"ds-func-p\">Vista semanal y diaria, por profesional o puesto.</p></div>",
+      "css": ".ds-func { padding: 20px 0; border-bottom: 2px dotted #111111; max-width: 420px; } .ds-func-name { display: flex; align-items: baseline; gap: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 15.5px; color: #111111; } .ds-func-name::after { content: ''; flex: 1; border-bottom: 2px dotted #D4A800; transform: translateY(-3px); } .ds-func-p { font-family: 'Open Sans', sans-serif; font-size: 14.5px; margin: 7px 0 0; color: #3B3629; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Volante de Barrio",
+    "overview": "La landing es un volante de barrio impreso a dos tintas en una risograph: tinta amarillo fluo y tinta negra sobre papel cálido con grano visible. Todo lo que aparece en pantalla se comporta como material de imprenta — tickets troquelados, recibos, sellos de goma, puntos líder de lista de precios — nunca como 'UI de SaaS'. El mundo rechaza explícitamente el hero de screenshot flotante sobre degradado, los glows de color y toda superficie vidriosa o levitante. La textura es estructural, no decorativa: una capa fija de grano SVG cubre toda la página, y cada campo de tinta plena lleva un mottle propio en multiply o screen que simula la densidad irregular de la tinta. El desregistro leve — la pasada amarilla corrida 6px/5px bajo el titular negro — es la firma del mundo y aparece solo en titulares display.",
+    "keyCharacteristics": [
+      "Dos tintas + papel: amarillo #F5C518 y negro #111111 sobre crema #F8F1DE, con una pasada dorada #D4A800 de refuerzo.",
+      "Bordes de 2px negros en todo; troquel dashed y puntos líder dotted como divisores.",
+      "Sombras duras offset sin blur (la 'sombra de registro'), nunca sombras difusas.",
+      "Esquinas rectas por doctrina; rotaciones leves (±1–3°) en los artefactos de papel.",
+      "Poppins 800 MAYÚSCULAS para display; Open Sans para cuerpo."
+    ],
+    "rules": [
+      { "name": "The Two-Ink Rule", "body": "Todo color en pantalla es papel, amarillo o negro (más la pasada dorada derivada del amarillo). Un tercer hue solo puede existir como tinta de sello semántico, y hoy solo existe el verde #0E7A55.", "section": "colors" },
+      { "name": "The Legible Gold Rule", "body": "#D4A800 (y cualquier dorado saturado) es decorativo: sombras, líneas, tachados. Texto dorado sobre claro usa siempre #7A5A06.", "section": "colors" },
+      { "name": "The Caps Display Rule", "body": "Todo lo que compone en Poppins va en mayúsculas, peso ≥700, interlínea 0.95 en tamaños display. Poppins nunca aparece en minúscula de texto corrido.", "section": "typography" },
+      { "name": "The Misregistration Rule", "body": "El desregistro (.misreg: pasada corrida translate(6px, 5px) con animación settle de 700ms) es exclusivo de titulares display/headline. La pasada corrida es amarilla sobre claro y sobre negro, y papel sobre campo amarillo. Nunca en cuerpo, botones ni labels.", "section": "typography" },
+      { "name": "The Registration Shadow Rule", "body": "Toda sombra es un offset sólido sin blur, negra sobre claro y dorada (#D4A800) sobre negro o amarillo. Un box-shadow con radio de blur no existe en este mundo.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do encerrar toda pieza en borde 2px sólido #111111 y separar secciones con reglas de 2px.",
+      "Do usar la sombra de registro (offset sólido, sin blur; negra sobre claro, #D4A800 sobre oscuro) como única fuente de profundidad.",
+      "Do rotar levemente (±0.6–3°) las piezas de papel montadas y los sellos.",
+      "Do componer display en Poppins 800 UPPERCASE, lh 0.95, y reservar .misreg para titulares.",
+      "Do usar dashed para troquel/cortes y dotted para puntos líder y divisores de lista.",
+      "Do dibujar ornamentos como SVG inline de lenguaje de imprenta (semitonos, diales, círculos de tinta)."
+    ],
+    "donts": [
+      "Don't usar gradientes de color, glows, sombras difusas ni superficies vidriosas — el mundo rechaza el hero SaaS de screenshot flotante.",
+      "Don't redondear esquinas de botones, tarjetas, tickets o sellos; el radius solo existe en burbujas de chat (12px) y perforaciones.",
+      "Don't usar #D4A800 ni ningún dorado saturado como color de texto; texto dorado es #7A5A06.",
+      "Don't introducir hues fuera de las dos tintas salvo el verde de sello #0E7A55, y solo con rol semántico.",
+      "Don't usar iconos de glifo, icon fonts ni emojis como íconos; la iconografía del mundo es tipográfica y de SVG de imprenta.",
+      "Don't animar más allá del settle del desregistro y las transiciones de 200ms de despegue/aplastado; siempre respetando prefers-reduced-motion."
+    ]
+  }
+}

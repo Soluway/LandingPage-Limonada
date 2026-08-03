@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "open sans",
+        "createdAt": "2026-08-02T23:19:54.818Z",
+        "reason": "Variante lowercase en URL de Google Fonts — mismo caso: tipografía oficial del design system Limonada"
+      }
+    ]
+  }
+}

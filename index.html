@@ -3,1774 +3,1038 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Limonada — Gestión profesional para tu negocio de estética</title>
-  <meta name="description" content="Reemplaza el caos de WhatsApp y el papel. Limonada es la plataforma todo-en-uno para peluquerías, barberías, salones de belleza y más." />
+  <title>Limonada — Turnos online para tu negocio</title>
+  <meta name="description" content="Tus clientes reservan solos por un link. Agenda, recordatorios y pagos para peluquerías, barberías, consultorios y todo negocio que vive de turnos." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --primary:      #F5C518;
-      --primary-dark: #D4A800;
-      --primary-deep: #1A1A1A;
-      --secondary:    #FFF3B0;
-      --accent:       #F5C518;
-      --accent-dark:  #D4A800;
-      --bg:           #FFFFFF;
-      --bg-soft:      #FFFDF0;
-      --bg-white:     #FFFFFF;
-      --text:         #111111;
-      --text-body:    #333333;
-      --text-muted:   #666666;
-      --border:       #F0E68C;
-      --radius:       12px;
-      --shadow-sm:    0 1px 3px rgba(0,0,0,.06);
-      --shadow-md:    0 4px 16px rgba(0,0,0,.08);
-      --shadow-lg:    0 8px 32px rgba(0,0,0,.10);
-      --shadow-xl:    0 16px 48px rgba(0,0,0,.13);
-      --transition:   200ms ease;
+      --paper:      #F8F1DE;
+      --paper-deep: #F0E6C8;
+      --ink-y:      #F5C518;
+      --ink-y-deep: #D4A800;
+      --ink-k:      #111111;
+      --ink-body:   #3B3629;
+      --gold-text:  #7A5A06;
+      --success:    #0E7A55;
+
+      --shadow-reg: 5px 5px 0 var(--ink-k);
+      --t: 200ms cubic-bezier(.22,.9,.35,1);
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Open Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text-body);
+      font-size: 16.5px;
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      color: var(--ink-body);
+      background: var(--paper);
     }
 
-    h1, h2, h3, h4, h5 {
+    /* grano de papel — una sola capa fija, barata */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 90;
+      opacity: .5;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* densidad de tinta: mottle sobre los campos impresos */
+    .hero, .demo, .pasos, .cierre { position: relative; }
+    .hero::before, .demo::before, .pasos::before, .cierre::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23m)'/%3E%3C/svg%3E");
+    }
+    .hero::before, .demo::before { mix-blend-mode: multiply; opacity: .14; }
+    .pasos::before, .cierre::before { mix-blend-mode: screen; opacity: .10; }
+    .hero .container, .demo .container, .pasos .container, .cierre .container { position: relative; z-index: 1; }
+
+    h1, h2, h3, .display {
       font-family: 'Poppins', sans-serif;
-      color: var(--text);
-      line-height: 1.2;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: .95;
+      letter-spacing: -.02em;
+      color: var(--ink-k);
+      text-wrap: balance;
     }
 
-    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--ink-k); outline-offset: 3px; }
 
-    img { max-width: 100%; display: block; }
-
-    /* ── LAYOUT ─────────────────────────────────────── */
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 24px;
+    /* ── titular desregistrado: pasada amarilla debajo de la negra ── */
+    .misreg {
+      position: relative;
+      display: inline-block;
+    }
+    .misreg > span {
+      position: relative;
+      z-index: 2;
+    }
+    .misreg::before {
+      content: attr(data-text) / "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      color: var(--ink-y);
+      transform: translate(6px, 5px);
+      animation: settle 700ms cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes settle {
+      from { transform: translate(18px, 14px); }
+      to   { transform: translate(6px, 5px); }
     }
 
-    section { padding: 96px 0; }
-    section:first-of-type { padding-top: 0; }
-
-    /* ── BUTTONS ────────────────────────────────────── */
+    /* ── botones ticket ── */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: var(--radius);
+      display: inline-block;
       font-family: 'Poppins', sans-serif;
-      font-weight: 600;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .02em;
       font-size: 15px;
+      text-decoration: none;
+      padding: 15px 30px;
+      border: 2px solid var(--ink-k);
       cursor: pointer;
-      border: none;
-      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
-      white-space: nowrap;
+      transition: transform var(--t), box-shadow var(--t);
     }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #111;
-      box-shadow: 0 4px 14px rgba(245,197,24,.40);
+    .btn-ink {
+      background: var(--ink-y);
+      color: var(--ink-k);
+      box-shadow: var(--shadow-reg);
     }
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      box-shadow: 0 6px 20px rgba(245,197,24,.55);
-      transform: translateY(-1px);
+    .btn-ink:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--ink-k);
     }
-    .btn-primary:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
-
-    .btn-ghost {
+    .btn-ink:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--ink-k);
+    }
+    .btn-line {
       background: transparent;
-      color: #111;
-      border: 2px solid #111;
+      color: var(--ink-k);
+      box-shadow: none;
     }
-    .btn-ghost:hover {
-      background: #111;
-      color: var(--primary);
-      transform: translateY(-1px);
+    .btn-line:hover { background: var(--ink-k); color: var(--paper); }
+    .on-ink .btn-line { border-color: var(--ink-k); }
+
+    /* ── masthead ── */
+    header {
+      border-bottom: 2px solid var(--ink-k);
+      background: var(--paper);
     }
-    .btn-ghost:focus-visible { outline: 3px solid #111; outline-offset: 3px; }
-
-    .btn-lg { padding: 18px 36px; font-size: 17px; }
-
-    /* ── NAVBAR ─────────────────────────────────────── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 68px;
+    .mast {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 24px;
+      padding: 14px 24px;
+      max-width: 1140px;
+      margin: 0 auto;
     }
-
-    .nav-logo {
+    .mast-logo {
       display: flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
       font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 22px;
-      color: #111;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: .04em;
+      color: var(--ink-k);
     }
-
-    .nav-logo img { flex-shrink: 0; height: 36px; width: auto; }
-
-    .nav-links {
+    .mast-logo img { height: 34px; width: auto; display: block; }
+    .mast nav ul {
       display: flex;
-      align-items: center;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
     }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-muted);
-      transition: color var(--transition);
-    }
-    .nav-links a:hover { color: #111; }
-
-    .nav-cta { display: flex; align-items: center; gap: 12px; }
-
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #111;
-      border-radius: 2px;
-      transition: all var(--transition);
-    }
-
-    /* ── HERO ───────────────────────────────────────── */
-    .hero {
-      padding: 80px 0 100px;
-      background: linear-gradient(135deg, #FFFFFF 0%, #FFFBEB 50%, #FEF9C3 100%);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -120px;
-      right: -120px;
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle, rgba(245,197,24,.20) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #FEF3C7;
-      color: #92400E;
-      border-radius: 100px;
-      padding: 6px 14px;
-      font-size: 13px;
+    .mast nav a {
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
-      margin-bottom: 24px;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-decoration: none;
+      color: var(--ink-k);
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+      cursor: pointer;
+      transition: border-color var(--t);
     }
+    .mast nav a:hover { border-color: var(--ink-y-deep); }
+    .mast .btn { padding: 10px 20px; font-size: 13px; }
 
-    .hero-badge-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
+    /* ── hero: campo de tinta amarilla ── */
+    .hero {
+      background: var(--ink-y);
+      border-bottom: 2px solid var(--ink-k);
+      padding: 72px 0 0;
+      overflow: hidden;
     }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: .6; transform: scale(1.3); }
-    }
-
+    .hero .container { position: relative; }
     .hero h1 {
-      font-size: clamp(36px, 4vw, 54px);
-      font-weight: 800;
-      margin-bottom: 20px;
-      letter-spacing: -0.5px;
+      font-size: clamp(3rem, 8.5vw, 6rem);
+      max-width: 11ch;
     }
-
-    .hero h1 span { color: #B8860B; }
-
+    .hero h1 .misreg::before { color: var(--paper); }
     .hero-sub {
-      font-size: 18px;
-      color: var(--text-muted);
-      margin-bottom: 36px;
-      max-width: 480px;
+      max-width: 54ch;
+      margin: 28px 0 0;
+      font-size: 19px;
+      color: var(--ink-k);
+      font-weight: 600;
     }
-
     .hero-actions {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 48px;
+      gap: 20px;
+      margin: 36px 0 0;
     }
-
-    .hero-social-proof {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .avatar-stack {
-      display: flex;
-    }
-
-    .avatar-stack .av {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid var(--bg);
-      margin-left: -8px;
-      background: var(--secondary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-    }
-    .avatar-stack .av:first-child { margin-left: 0; }
-    .av.av1 { background: #111111; }
-    .av.av2 { background: #D4A800; }
-    .av.av3 { background: #10B981; }
-    .av.av4 { background: #3B82F6; }
-
-    .stars { color: #FBBF24; letter-spacing: 1px; font-size: 14px; }
-
-    /* Hero visual */
-    .hero-visual {
-      position: relative;
-    }
-
-    .hero-card {
-      background: var(--bg-white);
-      border-radius: 20px;
-      box-shadow: var(--shadow-xl);
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .hero-card-topbar {
-      background: #111111;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .hero-card-topbar-title {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--primary);
-    }
-
-    .hero-card-topbar-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .hero-card-topbar-dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.3);
-    }
-
-    .hero-card-body { padding: 20px; }
-
-    .mini-kpis {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .mini-kpi {
-      background: #FFFBEB;
-      border-radius: 10px;
-      padding: 12px;
-      text-align: center;
-    }
-
-    .mini-kpi-val {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 22px;
-      color: #B8860B;
-    }
-
-    .mini-kpi-lbl {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .agenda-rows { display: flex; flex-direction: column; gap: 8px; }
-
-    .agenda-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      background: #FAFAFA;
-      border-radius: 10px;
-      border-left: 3px solid #FDE68A;
-    }
-
-    .agenda-row.confirmed { border-left-color: #10B981; }
-    .agenda-row.pending   { border-left-color: #FBBF24; }
-    .agenda-row.done      { border-left-color: var(--text-muted); opacity: .6; }
-
-    .agenda-time {
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: #B8860B;
-      min-width: 44px;
-    }
-
-    .agenda-info { flex: 1; }
-
-    .agenda-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .agenda-service {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .agenda-badge {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 100px;
-    }
-
-    .badge-green  { background: #D1FAE5; color: #065F46; }
-    .badge-yellow { background: #FEF3C7; color: #92400E; }
-    .badge-gray   { background: #F3F4F6; color: #6B7280; }
-
-    .hero-floating {
-      position: absolute;
-      background: var(--bg-white);
-      border-radius: 14px;
-      padding: 12px 16px;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border);
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-    }
-
-    .hero-floating.f1 { bottom: -20px; left: -24px; }
-    .hero-floating.f2 { top: -16px; right: -20px; }
-
-    .float-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .float-icon.orange { background: #FFFBEB; }
-    .float-icon.green  { background: #ECFDF5; }
-
-    /* ── PROBLEM SECTION ────────────────────────────── */
-    .problem { background: var(--bg-white); }
-
-    .section-label {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #B8860B;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .section-sub {
-      font-size: 17px;
-      color: var(--text-muted);
-      max-width: 560px;
-    }
-
-    .section-header { margin-bottom: 56px; }
-    .section-header.center { text-align: center; }
-    .section-header.center .section-sub { margin: 0 auto; }
-
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .pain-list { display: flex; flex-direction: column; gap: 20px; }
-
-    .pain-item {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .pain-icon {
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
-      border-radius: 12px;
-      background: #FEF3C7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pain-item h4 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .pain-item p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .vs-card {
-      background: #FFFBEB;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid #FDE68A;
-    }
-
-    .vs-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .vs-col {
-      padding: 20px;
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
+    .hero .btn-ink { background: var(--paper); }
+    .hero-note {
       font-size: 14px;
       font-weight: 700;
+      color: var(--ink-k);
     }
 
-    .vs-col.before {
-      background: #FEF2F2;
-      color: #991B1B;
-    }
-
-    .vs-col.after {
-      background: #ECFDF5;
-      color: #065F46;
-    }
-
-    .vs-rows { padding: 8px; display: flex; flex-direction: column; gap: 4px; }
-
-    .vs-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-    }
-
-    .vs-cell {
-      padding: 12px 14px;
-      border-radius: 10px;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .vs-cell.bad  { background: #FFF5F5; color: #7F1D1D; }
-    .vs-cell.good { background: #F0FDF4; color: #14532D; font-weight: 500; }
-
-    /* ── FEATURES ────────────────────────────────────── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      transition: box-shadow var(--transition), transform var(--transition);
-    }
-
-    .feature-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-4px);
-    }
-
-    .feature-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: #FEF3C7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-
-    .feature-card h3 {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ── HOW IT WORKS ────────────────────────────────── */
-    .how { background: var(--bg-white); }
-
-    .steps {
+    /* tira de tickets del flujo de reserva */
+    .stub-strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      position: relative;
+      gap: 0;
+      margin: 64px -2px 0;
+      border: 2px solid var(--ink-k);
+      border-bottom: none;
+      background: var(--paper);
     }
-
-    .steps::before {
+    .stub {
+      padding: 22px 20px 26px;
+      border-right: 2px dashed var(--ink-k);
+      position: relative;
+      transition: transform var(--t);
+    }
+    .stub:last-child { border-right: none; background: var(--ink-k); }
+    .stub:hover { transform: translateY(-4px); }
+    /* troquel: perforaciones en las uniones de la tira */
+    .stub:not(:last-child)::before,
+    .stub:not(:last-child)::after {
       content: '';
       position: absolute;
-      top: 26px;
-      left: 10%;
-      right: 10%;
-      height: 2px;
-      background: linear-gradient(90deg, #FDE68A 0%, #F5C518 100%);
-      z-index: 0;
-    }
-
-    .step {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .step-num {
-      width: 52px;
-      height: 52px;
+      right: -9px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: #F5C518;
-      border: 3px solid #F5C518;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 2px solid var(--ink-k);
+      z-index: 2;
+    }
+    .stub:not(:last-child)::before { top: -9px; background: var(--ink-y); }
+    .stub:not(:last-child)::after  { bottom: -9px; background: var(--paper); }
+    .stub-step {
       font-family: 'Poppins', sans-serif;
       font-weight: 800;
-      font-size: 18px;
-      color: #111;
-      margin: 0 auto 20px;
-      box-shadow: 0 0 0 6px #fff;
+      font-size: 32px;
+      color: var(--gold-text);
+      line-height: 1;
     }
-
-    .step h4 {
-      font-size: 16px;
+    .stub:last-child .stub-step { color: var(--ink-y); }
+    .stub h3 { font-size: 15px; margin: 10px 0 6px; }
+    .stub:last-child h3 { color: var(--paper); }
+    .stub p { font-size: 13.5px; line-height: 1.45; }
+    .stub:last-child p { color: var(--paper-deep); }
+    .strip-caption {
+      background: var(--paper);
+      border-top: 2px solid var(--ink-k);
+      margin: 0 -2px;
+      padding: 8px 20px;
+      font-size: 12.5px;
       font-weight: 700;
-      margin-bottom: 8px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold-text);
     }
 
-    .step p {
+    /* ── secciones ── */
+    section { padding: 96px 0; }
+    .sec-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      max-width: 20ch;
+      margin-bottom: 18px;
+    }
+    .sec-sub {
+      font-size: 18px;
+      max-width: 58ch;
+      margin-bottom: 56px;
+    }
+
+    /* ── el problema: recibo del caos ── */
+    .problema { background: var(--paper); }
+    .antes-despues {
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .recibo {
+      background: #FFFDF4;
+      border: 2px solid var(--ink-k);
+      box-shadow: var(--shadow-reg);
+      padding: 26px 24px 0;
+      transform: rotate(-1.2deg);
+    }
+    .recibo-head {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--ink-k);
+      border-bottom: 2px dashed var(--ink-k);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+    .chat-line {
       font-size: 14px;
-      color: var(--text-muted);
+      padding: 7px 12px;
+      border: 1.5px solid var(--ink-k);
+      border-radius: 12px 12px 12px 3px;
+      margin-bottom: 9px;
+      max-width: 90%;
+      background: transparent;
+      color: var(--ink-body);
     }
-
-    /* ── PUBLIC BOOKING ──────────────────────────────── */
-    .booking-section {
-      background: #111111;
-      position: relative;
-      overflow: hidden;
+    .chat-line.own {
+      margin-left: auto;
+      border-radius: 12px 12px 3px 12px;
+      background: var(--ink-y);
+      color: var(--ink-k);
+      font-weight: 600;
     }
-
-    .booking-section::before {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      left: -80px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(245,197,24,.10) 0%, transparent 70%);
-      pointer-events: none;
+    .chat-hora {
+      font-size: 11px;
+      color: var(--gold-text);
+      font-weight: 700;
+      text-align: right;
+      display: block;
     }
-
-    .booking-inner {
+    .recibo-corte {
+      margin: 14px -24px 0;
+      height: 18px;
+      background:
+        linear-gradient(-45deg, transparent 12px, #FFFDF4 0) left/16px 18px repeat-x;
+      filter: drop-shadow(0 3px 2px rgba(0,0,0,.12));
+    }
+    .recibo-total {
+      border-top: 2px dashed var(--ink-k);
+      padding: 12px 0 6px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: var(--ink-k);
+      display: flex;
+      justify-content: space-between;
+    }
+    .problema-copy h2 { margin-bottom: 22px; }
+    .problema-copy p { max-width: 52ch; margin-bottom: 18px; }
+    .vs-list { list-style: none; margin: 34px 0 0; }
+    .vs-list li {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
+      border: 2px solid var(--ink-k);
+      border-bottom: none;
+      font-size: 14.5px;
+    }
+    .vs-list li:last-child { border-bottom: 2px solid var(--ink-k); }
+    .vs-list .antes {
+      padding: 12px 16px;
+      border-right: 2px solid var(--ink-k);
+      color: var(--ink-body);
+      text-decoration: line-through;
+      text-decoration-color: var(--ink-y-deep);
+      text-decoration-thickness: 2px;
+    }
+    .vs-list .despues {
+      padding: 12px 16px;
+      background: var(--ink-y);
+      color: var(--ink-k);
+      font-weight: 700;
     }
 
-    .booking-inner .section-label { color: #F5C518; }
-    .booking-inner .section-title  { color: #FFFFFF; }
-    .booking-inner .section-sub    { color: rgba(255,255,255,.65); }
+    /* ── cómo funciona: sección de tinta negra ── */
+    .pasos {
+      background: var(--ink-k);
+      border-top: 2px solid var(--ink-k);
+      border-bottom: 2px solid var(--ink-k);
+    }
+    .pasos .sec-title { color: var(--paper); }
+    .pasos .sec-title .misreg::before { color: var(--ink-y); }
+    .pasos .sec-sub { color: var(--paper-deep); }
+    .pasos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--paper);
+      border: 2px solid var(--paper);
+    }
+    .paso {
+      background: var(--ink-k);
+      padding: 26px 22px 30px;
+    }
+    .paso-num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1;
+      color: var(--ink-y);
+    }
+    .paso h3 { color: var(--paper); font-size: 16px; margin: 12px 0 8px; }
+    .paso p { color: var(--paper-deep); font-size: 14px; line-height: 1.5; }
+    .pasos-cta { margin-top: 44px; }
+    .pasos .btn-ink { box-shadow: 5px 5px 0 var(--ink-y-deep); }
+    .pasos .btn-ink:hover { box-shadow: 8px 8px 0 var(--ink-y-deep); }
 
-    .booking-steps { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+    /* ── funcionalidades: lista de servicios con puntos líder ── */
+    .funcs { background: var(--paper); }
+    .func-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 72px;
+    }
+    .func {
+      padding: 20px 0;
+      border-bottom: 2px dotted var(--ink-k);
+    }
+    .func-name {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 15.5px;
+      color: var(--ink-k);
+    }
+    .func-name::after {
+      content: '';
+      flex: 1;
+      border-bottom: 2px dotted var(--ink-y-deep);
+      transform: translateY(-3px);
+    }
+    .func p { font-size: 14.5px; margin-top: 7px; max-width: 46ch; }
+    .func strong { color: var(--ink-k); }
 
-    .booking-step {
+    /* ── demo agenda: campo amarillo ── */
+    .demo {
+      background: var(--ink-y);
+      border-top: 2px solid var(--ink-k);
+      border-bottom: 2px solid var(--ink-k);
+      overflow: hidden;
+    }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr minmax(300px, 440px);
+      gap: 72px;
+      align-items: center;
+    }
+    .demo-copy .sec-sub { margin-bottom: 30px; color: var(--ink-k); font-weight: 600; }
+    .agenda-card {
+      background: var(--paper);
+      border: 2px solid var(--ink-k);
+      box-shadow: 7px 7px 0 var(--ink-y-deep);
+      transform: rotate(1deg);
+    }
+    .agenda-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--ink-k);
+      padding: 14px 18px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: var(--ink-k);
+    }
+    .agenda-head small {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-size: 10.5px;
+      letter-spacing: .1em;
+      color: var(--gold-text);
+    }
+    .turno {
       display: flex;
       align-items: center;
       gap: 14px;
-    }
-
-    .booking-step-dot {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #F5C518;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-family: 'Poppins', sans-serif;
+      padding: 13px 18px;
+      border-bottom: 1.5px dashed rgba(17,17,17,.35);
       font-size: 14px;
-      font-weight: 700;
-      color: #111;
     }
-
-    .booking-step-text { color: rgba(255,255,255,.85); font-size: 15px; }
-
-    .booking-phone {
-      max-width: 320px;
-      margin: 0 auto;
-    }
-
-    .phone-shell {
-      background: #222222;
-      border-radius: 36px;
-      padding: 12px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.5);
-      border: 2px solid rgba(255,255,255,.1);
-    }
-
-    .phone-screen {
-      background: var(--bg-white);
-      border-radius: 26px;
-      overflow: hidden;
-      padding: 20px 16px;
-    }
-
-    .phone-header {
-      text-align: center;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 16px;
-    }
-
-    .phone-logo {
+    .turno:last-of-type { border-bottom: none; }
+    .turno-hora {
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      font-size: 20px;
-      color: #111;
+      font-size: 13.5px;
+      color: var(--ink-k);
+      min-width: 46px;
+      font-variant-numeric: tabular-nums;
     }
-
-    .phone-biz {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .phone-step-label {
-      font-size: 11px;
+    .turno-info { flex: 1; min-width: 0; }
+    .turno-info b { color: var(--ink-k); display: block; font-size: 14px; }
+    .turno-info span { font-size: 12.5px; }
+    .sello {
+      font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      letter-spacing: 1px;
+      font-size: 10px;
+      letter-spacing: .09em;
       text-transform: uppercase;
-      color: #B8860B;
-      margin-bottom: 10px;
-    }
-
-    .phone-service-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .phone-service-card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: border-color var(--transition), background var(--transition);
-    }
-
-    .phone-service-card.selected {
-      border-color: #F5C518;
-      background: #FFFBEB;
-    }
-
-    .psvc-name { font-size: 13px; font-weight: 600; color: var(--text); }
-    .psvc-dur  { font-size: 11px; color: var(--text-muted); }
-    .psvc-price { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; color: #B8860B; }
-
-    .phone-btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #F5C518;
-      color: #111;
-      border: none;
-      border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      margin-top: 16px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    /* ── INTEGRATIONS ────────────────────────────────── */
-    .integrations { background: var(--bg-white); }
-
-    .integration-logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 48px;
-    }
-
-    .int-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #FFFBEB;
-      border: 1px solid #FDE68A;
-      border-radius: 12px;
-      padding: 14px 22px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-body);
-      transition: box-shadow var(--transition), transform var(--transition);
-    }
-
-    .int-logo:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    /* ── PRICING ─────────────────────────────────────── */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      align-items: start;
-    }
-
-    .pricing-card {
-      background: var(--bg-white);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 32px 28px;
-      transition: box-shadow var(--transition);
-    }
-
-    .pricing-card.featured {
-      border-color: var(--primary);
-      box-shadow: var(--shadow-xl);
-      position: relative;
-    }
-
-    .pricing-badge {
-      position: absolute;
-      top: -13px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #F5C518;
-      color: #111;
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 16px;
-      border-radius: 100px;
+      padding: 4px 9px;
+      border: 1.5px solid currentColor;
+      transform: rotate(-3deg);
       white-space: nowrap;
     }
+    .sello.ok   { color: var(--success); }
+    .sello.wait { color: var(--ink-k); background: var(--ink-y); border-color: var(--ink-k); }
+    .sello.done { color: var(--ink-body); opacity: .6; }
 
-    .plan-name {
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-
-    .plan-price {
-      font-family: 'Poppins', sans-serif;
-      font-size: 42px;
-      font-weight: 800;
-      color: var(--text);
-      line-height: 1;
-    }
-
-    .plan-price sup { font-size: 20px; font-weight: 600; vertical-align: top; margin-top: 8px; }
-    .plan-period { font-size: 14px; color: var(--text-muted); font-weight: 400; }
-
-    .plan-desc { font-size: 14px; color: var(--text-muted); margin: 12px 0 24px; }
-
-    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-
-    .plan-features li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--text-body);
-    }
-
-    .plan-features .check {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-
-    .plan-features .check.green  { color: #10B981; }
-    .plan-features .check.muted  { color: #D1D5DB; }
-
-    /* ── TESTIMONIALS ────────────────────────────────── */
-    .testimonials { background: var(--bg-white); }
-
-    .testi-grid {
+    /* ── precios: etiquetas de tarifa ── */
+    .precios { background: var(--paper); }
+    .tarifas {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      align-items: start;
+    }
+    .tarifa {
+      background: #FFFDF4;
+      border: 2px solid var(--ink-k);
+      padding: 30px 26px;
+      position: relative;
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .tarifa:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink-k); }
+    .tarifa.pro {
+      background: var(--ink-y);
+      box-shadow: var(--shadow-reg);
+      transform: rotate(-.6deg);
+    }
+    .tarifa.pro:hover { transform: rotate(-.6deg) translate(-2px,-2px); box-shadow: 8px 8px 0 var(--ink-k); }
+    .stamp {
+      position: absolute;
+      top: -16px;
+      right: 18px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--ink-k);
+      color: var(--ink-y);
+      padding: 6px 12px;
+      transform: rotate(3deg);
+    }
+    .tarifa h3 { font-size: 20px; }
+    .tarifa-precio {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 42px;
+      color: var(--ink-k);
+      line-height: 1.1;
+      margin: 12px 0 2px;
+      letter-spacing: -.02em;
+    }
+    .tarifa-precio small {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .tarifa-para { font-size: 13.5px; margin-bottom: 18px; }
+    .tarifa.pro .tarifa-para { color: var(--ink-k); }
+    .tarifa ul {
+      list-style: none;
+      margin: 0 0 24px;
+      font-size: 14px;
+    }
+    .tarifa li {
+      padding: 7px 0 7px 26px;
+      border-bottom: 1.5px dotted rgba(17,17,17,.3);
+      position: relative;
+    }
+    .tarifa li::before {
+      content: '';
+      position: absolute;
+      left: 2px; top: 13px;
+      width: 12px; height: 7px;
+      border-left: 2.5px solid var(--ink-y-deep);
+      border-bottom: 2.5px solid var(--ink-y-deep);
+      transform: rotate(-45deg);
+    }
+    .tarifa.pro li::before { border-color: var(--ink-k); }
+    .tarifa li.no { opacity: .45; }
+    .tarifa li.no::before {
+      border: none;
+      width: 12px; height: 2.5px;
+      background: var(--ink-body);
+      top: 16px;
+      transform: none;
+    }
+    .tarifa .btn { width: 100%; text-align: center; padding: 13px 10px; font-size: 13.5px; }
+    .tarifa.pro .btn-ink { background: var(--paper); }
+    .precios-nota {
+      margin-top: 40px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gold-text);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      text-align: center;
+    }
+
+    /* ── cierre: tinta negra ── */
+    .cierre {
+      background: var(--ink-k);
+      text-align: center;
+      padding: 110px 0;
+      overflow: hidden;
+    }
+    .cierre-orn {
+      position: absolute;
+      right: -30px;
+      top: -46px;
+      opacity: .9;
+    }
+    .demo-orn {
+      position: absolute;
+      right: -28px;
+      top: -48px;
+      transform: rotate(14deg);
+    }
+    @media (max-width: 860px) {
+      .cierre-orn { width: 110px; height: 110px; right: -24px; }
+      .demo-orn { display: none; }
+    }
+    .cierre h2 {
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      color: var(--paper);
+      margin: 0 auto 26px;
+      max-width: 16ch;
+    }
+    .cierre h2 .misreg::before { color: var(--ink-y); }
+    .cierre p { color: var(--paper-deep); font-size: 18px; max-width: 48ch; margin: 0 auto 36px; }
+    .cierre .btn-ink { box-shadow: 5px 5px 0 var(--ink-y-deep); font-size: 17px; padding: 18px 40px; }
+    .cierre .btn-ink:hover { box-shadow: 9px 9px 0 var(--ink-y-deep); }
+    .cierre p.cierre-nota { margin: 48px auto 0; font-size: 13.5px; color: var(--paper-deep); font-weight: 600; }
+
+    /* ── footer ── */
+    footer {
+      background: var(--paper);
+      border-top: 2px solid var(--ink-k);
+      padding: 44px 0;
+    }
+    .foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
       gap: 24px;
     }
-
-    .testi-card {
-      background: #FFFBEB;
-      border: 1px solid #FDE68A;
-      border-radius: var(--radius);
-      padding: 28px 24px;
-    }
-
-    .testi-stars { color: #FBBF24; font-size: 16px; margin-bottom: 12px; }
-
-    .testi-text {
-      font-size: 15px;
-      color: var(--text-body);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .testi-author { display: flex; align-items: center; gap: 12px; }
-
-    .testi-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .foot-logo { display: flex; align-items: center; gap: 10px; }
+    .foot-logo img { height: 30px; width: auto; }
+    .foot-logo b {
       font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 16px;
-      color: #fff;
-      flex-shrink: 0;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: .04em;
+      color: var(--ink-k);
     }
-
-    .testi-name  { font-size: 14px; font-weight: 700; color: var(--text); }
-    .testi-role  { font-size: 12px; color: var(--text-muted); }
-
-    /* ── FINAL CTA ───────────────────────────────────── */
-    .final-cta {
-      background: #111111;
-      text-align: center;
-      padding: 100px 0;
-    }
-
-    .final-cta .section-title {
-      color: #F5C518;
-    }
-
-    .final-cta .section-sub {
-      color: rgba(255,255,255,.70);
-      max-width: 480px;
-      margin: 0 auto 40px;
-    }
-
-    .cta-actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .cta-note {
-      font-size: 13px;
-      color: rgba(255,255,255,.5);
-      margin-top: 16px;
-    }
-
-    /* ── FOOTER ──────────────────────────────────────── */
-    footer {
-      background: #0D0D0D;
-      padding: 60px 0 32px;
-      color: rgba(255,255,255,.6);
-    }
-
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-
-    .footer-brand .nav-logo { color: #fff; margin-bottom: 12px; }
-
-    .footer-brand p {
-      font-size: 14px;
-      line-height: 1.6;
-      max-width: 240px;
-    }
-
-    .footer-col h5 {
-      font-family: 'Poppins', sans-serif;
+    .foot nav ul { display: flex; gap: 22px; list-style: none; flex-wrap: wrap; }
+    .foot nav a {
       font-size: 13px;
       font-weight: 700;
-      color: #fff;
-      margin-bottom: 16px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: .06em;
+      color: var(--ink-k);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink-y-deep);
+      cursor: pointer;
     }
+    .foot nav a:hover { background: var(--ink-y); }
+    .foot-meta { font-size: 13px; width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .foot-meta a { font-weight: 700; }
 
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-
-    .footer-col ul a {
-      font-size: 14px;
-      color: rgba(255,255,255,.55);
-      transition: color var(--transition);
-    }
-    .footer-col ul a:hover { color: #fff; }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 13px;
-    }
-
-    .footer-bottom a { color: rgba(255,255,255,.4); transition: color var(--transition); }
-    .footer-bottom a:hover { color: rgba(255,255,255,.8); }
-
-    /* ── RESPONSIVE ──────────────────────────────────── */
+    /* ── responsive ── */
     @media (max-width: 1024px) {
-      .features-grid    { grid-template-columns: repeat(2, 1fr); }
-      .footer-inner     { grid-template-columns: 1fr 1fr; }
+      .func-cols { gap: 0 48px; }
+      .antes-despues { gap: 44px; }
     }
-
-    @media (max-width: 768px) {
-      section { padding: 64px 0; }
-
-      .nav-links, .nav-cta { display: none; }
-      .nav-hamburger { display: flex; }
-
-      .hero-inner       { grid-template-columns: 1fr; }
-      .hero-visual      { display: none; }
-
-      .problem-grid     { grid-template-columns: 1fr; }
-      .features-grid    { grid-template-columns: 1fr; }
-      .steps            { grid-template-columns: 1fr 1fr; }
-      .steps::before    { display: none; }
-      .booking-inner    { grid-template-columns: 1fr; }
-      .pricing-grid     { grid-template-columns: 1fr; }
-      .testi-grid       { grid-template-columns: 1fr; }
-      .footer-inner     { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom    { flex-direction: column; text-align: center; }
+    @media (max-width: 860px) {
+      section { padding: 72px 0; }
+      .mast { flex-wrap: wrap; row-gap: 10px; }
+      .mast nav { order: 3; width: 100%; border-top: 2px dashed var(--ink-k); padding-top: 10px; }
+      .mast nav ul { gap: 18px; }
+      .mast nav a { font-size: 12px; }
+      .stub:not(:last-child)::before, .stub:not(:last-child)::after { display: none; }
+      .stub-strip { grid-template-columns: 1fr 1fr; }
+      .stub:nth-child(2) { border-right: none; }
+      .stub:nth-child(1), .stub:nth-child(2) { border-bottom: 2px dashed var(--ink-k); }
+      .pasos-grid { grid-template-columns: 1fr 1fr; }
+      .antes-despues { grid-template-columns: 1fr; }
+      .recibo { max-width: 420px; }
+      .func-cols { grid-template-columns: 1fr; }
+      .demo-grid { grid-template-columns: 1fr; gap: 48px; }
+      .agenda-card { max-width: 460px; }
+      .tarifas { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
     }
-
-    @media (max-width: 480px) {
-      .steps { grid-template-columns: 1fr; }
+    @media (max-width: 520px) {
+      body { font-size: 15.5px; }
+      .stub-strip, .pasos-grid { grid-template-columns: 1fr; }
+      .stub { border-right: none; border-bottom: 2px dashed var(--ink-k); }
+      .stub:last-child { border-bottom: none; }
+      .vs-list li { grid-template-columns: 1fr; }
+      .vs-list .antes { border-right: none; border-bottom: 2px dashed var(--ink-k); }
+      .hero { padding-top: 52px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .misreg::before { transform: translate(6px, 5px); }
     }
   </style>
 </head>
 <body>
+<!--
+THESIS: la landing es un volante de barrio impreso a dos tintas: vende "tu agenda se llena sola" con el calor de la imprenta y rechaza el hero SaaS de screenshot flotante sobre degradado.
+OWN-WORLD: papel calido #F8F1DE con grano; tintas amarillo fluo #F5C518 y negro #111111 con pasada dorada #D4A800; desregistro leve como firma; tickets troquelados, recibos, sellos y puntos lider; Poppins 800 caps display, Open Sans cuerpo.
+STORY: el dueno reconoce su caos (el recibo del chat), entiende el mecanismo (un link, el cliente reserva solo), ve el producto demostrado en papel, elige plan y toca "Empezar gratis".
+FIRST VIEWPORT: campo de tinta amarilla; titular gigante desregistrado "TU AGENDA SE LLENA SOLA"; CTA ticket papel con sombra offset arriba del fold; tira de 4 tickets troquelados con el flujo de reserva.
+FORM: volante de barrio risograph — challenger de catalogo risograph-web-system elegido por el usuario sobre la direccion asignada; seed 96e38f91.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md.
+-->
 
-<!-- ═══════════════════════════════════════ NAVBAR ═══ -->
-<nav role="navigation" aria-label="Navegación principal">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo" aria-label="Limonada inicio">
-      <img src="Gemini_Generated_Image_4uuu84uuu84uuu84-Photoroom.png" alt="Limonada logo" />
-      Limonada
+<header>
+  <div class="mast">
+    <a href="#" class="mast-logo" aria-label="Limonada — inicio">
+      <img src="logo-limonada.png" width="62" height="34" alt="" />
+      LIMONADA
     </a>
-    <ul class="nav-links" role="list">
-      <li><a href="#funcionalidades">Funcionalidades</a></li>
-      <li><a href="#como-funciona">Cómo funciona</a></li>
-      <li><a href="#precios">Precios</a></li>
-      <li><a href="#testimonios">Testimonios</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="#precios" class="btn btn-ghost" style="padding:10px 20px;font-size:14px;">Ver planes</a>
-      <a href="#" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Empezar gratis</a>
-    </div>
-    <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#precios">Precios</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-ink" href="https://app.limonada.online">Empezar gratis</a>
   </div>
-</nav>
+</header>
 
-<!-- ═══════════════════════════════════════ HERO ═════ -->
-<section class="hero" aria-labelledby="hero-heading">
+<main>
+
+<!-- ════ HERO ════ -->
+<section class="hero" aria-labelledby="h1">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-badge" role="status">
-          <span class="hero-badge-dot" aria-hidden="true"></span>
-          Nuevo — Ahora con notificaciones por WhatsApp
-        </div>
-        <h1 id="hero-heading">
-          Tu agenda,<br>
-          <span>sin el caos</span><br>
-          de WhatsApp
-        </h1>
-        <p class="hero-sub">
-          Limonada es la plataforma todo-en-uno para peluquerías, barberías y salones de belleza.
-          Reservas online, agenda inteligente y pagos, todo en un solo lugar.
-        </p>
-        <div class="hero-actions">
-          <a href="https://app.limonada.online" class="btn btn-primary btn-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            Empezar gratis 14 días
-          </a>
-          <a href="#como-funciona" class="btn btn-ghost btn-lg">Ver demo</a>
-        </div>
-        <div class="hero-social-proof">
-          <div class="avatar-stack" aria-hidden="true">
-            <div class="av av1">M</div>
-            <div class="av av2">S</div>
-            <div class="av av3">L</div>
-            <div class="av av4">R</div>
-          </div>
-          <div>
-            <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-            <div>Más de <strong>300 negocios</strong> confían en Limonada</div>
-          </div>
-        </div>
-      </div>
+    <h1 id="h1">
+      <span class="misreg" data-text="Tu agenda"><span>Tu agenda</span></span><br />
+      <span class="misreg" data-text="se llena sola."><span>se llena sola.</span></span>
+    </h1>
+    <p class="hero-sub">Turnos online para peluquerías, barberías, consultorios y todo negocio que vive de turnos. Tus clientes reservan por un link. Vos atendés.</p>
+    <div class="hero-actions">
+      <a class="btn btn-ink" href="https://app.limonada.online">Empezar gratis · 14 días</a>
+      <span class="hero-note">Sin tarjeta de crédito</span>
+    </div>
 
-      <!-- Mockup del dashboard -->
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-card">
-          <div class="hero-card-topbar">
-            <span class="hero-card-topbar-title">Panel de hoy — Martes</span>
-            <div class="hero-card-topbar-dots">
-              <span></span><span></span><span></span>
-            </div>
-          </div>
-          <div class="hero-card-body">
-            <div class="mini-kpis">
-              <div class="mini-kpi">
-                <div class="mini-kpi-val">12</div>
-                <div class="mini-kpi-lbl">Turnos hoy</div>
-              </div>
-              <div class="mini-kpi">
-                <div class="mini-kpi-val">87%</div>
-                <div class="mini-kpi-lbl">Ocupación</div>
-              </div>
-              <div class="mini-kpi">
-                <div class="mini-kpi-val">$48k</div>
-                <div class="mini-kpi-lbl">Esta semana</div>
-              </div>
-            </div>
-            <div class="agenda-rows">
-              <div class="agenda-row confirmed">
-                <span class="agenda-time">10:00</span>
-                <div class="agenda-info">
-                  <div class="agenda-name">Rodrigo M.</div>
-                  <div class="agenda-service">Corte + barba · Lucas</div>
-                </div>
-                <span class="agenda-badge badge-green">Confirmado</span>
-              </div>
-              <div class="agenda-row pending">
-                <span class="agenda-time">11:30</span>
-                <div class="agenda-info">
-                  <div class="agenda-name">Sofía G.</div>
-                  <div class="agenda-service">Coloración · Ana</div>
-                </div>
-                <span class="agenda-badge badge-yellow">Pendiente</span>
-              </div>
-              <div class="agenda-row confirmed">
-                <span class="agenda-time">13:00</span>
-                <div class="agenda-info">
-                  <div class="agenda-name">Martín P.</div>
-                  <div class="agenda-service">Fade + diseño · Lucas</div>
-                </div>
-                <span class="agenda-badge badge-green">Confirmado</span>
-              </div>
-              <div class="agenda-row done">
-                <span class="agenda-time">09:00</span>
-                <div class="agenda-info">
-                  <div class="agenda-name">Lucía V.</div>
-                  <div class="agenda-service">Manicura · Carmen</div>
-                </div>
-                <span class="agenda-badge badge-gray">Completado</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-floating f1">
-          <div class="float-icon green">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-          </div>
-          Nueva reserva — Carlos A. · 15:00
-        </div>
-        <div class="hero-floating f2">
-          <div class="float-icon orange">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          Recordatorio enviado · 3 clientes
-        </div>
+    <div class="stub-strip" role="list" aria-label="Así reserva tu cliente">
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">1</div>
+        <h3>Elige el servicio</h3>
+        <p>De tu lista, con duración y precio a la vista.</p>
+      </div>
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">2</div>
+        <h3>Elige profesional</h3>
+        <p>Su preferido, o "cualquiera disponible".</p>
+      </div>
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">3</div>
+        <h3>Elige fecha y hora</h3>
+        <p>Sobre tu disponibilidad real, en tiempo real.</p>
+      </div>
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">4</div>
+        <h3>Turno confirmado</h3>
+        <p>Le llega la confirmación. A vos, el turno en la agenda.</p>
       </div>
     </div>
+    <p class="strip-caption">Así reserva tu cliente — sin llamarte, sin escribirte, a cualquier hora</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════ PROBLEMA ═ -->
-<section class="problem" id="problema" aria-labelledby="problem-heading">
+<!-- ════ EL PROBLEMA ════ -->
+<section class="problema" aria-labelledby="h2-problema">
   <div class="container">
-    <div class="problem-grid">
-      <div>
-        <span class="section-label">El problema</span>
-        <h2 class="section-title" id="problem-heading">Gestionás tu negocio<br>como en 2010</h2>
-        <p class="section-sub">Coordinás turnos por WhatsApp, anotás en papel y perdés clientes por la falta de organización. Hay una mejor manera.</p>
-        <div class="pain-list" style="margin-top:32px;">
-          <div class="pain-item">
-            <div class="pain-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            </div>
-            <div>
-              <h4>Turnos perdidos por WhatsApp</h4>
-              <p>Los mensajes se acumulan y los clientes se van si no respondés rápido.</p>
-            </div>
-          </div>
-          <div class="pain-item">
-            <div class="pain-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
-            </div>
-            <div>
-              <h4>Sin visibilidad del negocio</h4>
-              <p>No sabés qué profesional tiene más trabajo ni cuánto facturaste este mes.</p>
-            </div>
-          </div>
-          <div class="pain-item">
-            <div class="pain-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-            </div>
-            <div>
-              <h4>Clientes que no vuelven</h4>
-              <p>Sin recordatorios automáticos, el 40% de los clientes simplemente no regresa.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="antes-despues">
+      <figure class="recibo" aria-label="Ejemplo ilustrativo: coordinar un turno por chat">
+        <figcaption class="recibo-head">Cómo se anota un turno hoy · ejemplo</figcaption>
+        <p class="chat-line">Hola! Tenés turno para el sábado?</p>
+        <p class="chat-line own">Hola! Dejame ver y te digo</p>
+        <p class="chat-line">Dale</p>
+        <p class="chat-line own">A las 15 puede ser?</p>
+        <p class="chat-line">No puedo… más tarde tenés?</p>
+        <p class="chat-line own">17:30?</p>
+        <p class="chat-line">Con Ana puede ser?</p>
+        <p class="chat-line own">Ana a esa hora no está 😕 18:15?</p>
+        <p class="chat-line">Mmm te confirmo</p>
+        <span class="chat-hora">…dos días después, sin respuesta</span>
+        <div class="recibo-total"><span>Total:</span><span>1 turno, 9 mensajes</span></div>
+        <div class="recibo-corte" aria-hidden="true"></div>
+      </figure>
 
-      <div class="vs-card" role="table" aria-label="Antes vs después de Limonada">
-        <div class="vs-header" role="row">
-          <div class="vs-col before" role="columnheader">Antes de Limonada</div>
-          <div class="vs-col after" role="columnheader">Con Limonada</div>
-        </div>
-        <div class="vs-rows">
-          <div class="vs-row" role="row">
-            <div class="vs-cell bad" role="cell">Turnos por WhatsApp a toda hora</div>
-            <div class="vs-cell good" role="cell">Reservas online 24/7, solas</div>
-          </div>
-          <div class="vs-row" role="row">
-            <div class="vs-cell bad" role="cell">Agenda en papel o Excel</div>
-            <div class="vs-cell good" role="cell">Calendario digital en tiempo real</div>
-          </div>
-          <div class="vs-row" role="row">
-            <div class="vs-cell bad" role="cell">Clientes que se olvidan del turno</div>
-            <div class="vs-cell good" role="cell">Recordatorios automáticos por WhatsApp</div>
-          </div>
-          <div class="vs-row" role="row">
-            <div class="vs-cell bad" role="cell">Comisiones calculadas a mano</div>
-            <div class="vs-cell good" role="cell">Reporte de comisiones automático</div>
-          </div>
-          <div class="vs-row" role="row">
-            <div class="vs-cell bad" role="cell">Sin idea de cuánto facturás</div>
-            <div class="vs-cell good" role="cell">KPIs y reportes en tiempo real</div>
-          </div>
-          <div class="vs-row" role="row">
-            <div class="vs-cell bad" role="cell">Cobros en efectivo sin registro</div>
-            <div class="vs-cell good" role="cell">Pagos integrados con MercadoPago</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════ FEATURES ═ -->
-<section id="funcionalidades" aria-labelledby="features-heading">
-  <div class="container">
-    <div class="section-header center">
-      <span class="section-label">Funcionalidades</span>
-      <h2 class="section-title" id="features-heading">Todo lo que tu negocio necesita</h2>
-      <p class="section-sub">Diseñado para que ninguna operación crítica tome más de 6 clics.</p>
-    </div>
-
-    <div class="features-grid" role="list">
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
-        <h3>Agenda inteligente</h3>
-        <p>Vista semanal y diaria con toggle entre profesional y puesto de trabajo. Creá, editá y cancelá turnos en 3 clics. Colores por profesional para identificar al instante.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-        </div>
-        <h3>Link de reserva público</h3>
-        <p>Tu página personalizada en <strong>limonada.online/tu-negocio</strong>. Los clientes eligen servicio, profesional y horario sin que vos intervengas. Sin registro obligatorio.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 11.37a19.79 19.79 0 01-3.07-8.67A2 2 0 012.48 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </div>
-        <h3>Notificaciones automáticas</h3>
-        <p>Confirmaciones, recordatorios y cancelaciones por email y WhatsApp. Configurás con cuántas horas de anticipación se envía el recordatorio. Cero intervención manual.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        </div>
-        <h3>Pagos con MercadoPago</h3>
-        <p>QR, links de pago, efectivo, transferencia o terminal. Registrá señas como monto fijo o porcentaje. Webhook automático o registro manual. Historial de pagos por profesional.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h3>Reportes y métricas</h3>
-        <p>Dashboard con ingresos, turnos completados, tasa de cancelaciones y ocupación por puesto. Reporte de comisiones por empleado. Exportá en PDF o CSV.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h3>Gestión de equipo</h3>
-        <p>CRUD completo de empleados, asignación por sucursal, tipos de comisión (%, fijo, base+comisión), horarios y avatares. Roles diferenciados: dueño, operador, profesional.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3>Multi-sucursal</h3>
-        <p>Manejá varias ubicaciones desde un solo panel. Cada sucursal con su propia configuración de horarios, puestos de trabajo y empleados asignados.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
-        </div>
-        <h3>Google Calendar</h3>
-        <p>Sincronización bidireccional con Google Calendar. Los turnos crean eventos automáticamente. Los cambios en el calendar se reflejan en la agenda. Cada profesional puede conectar su cuenta personal.</p>
-      </div>
-
-      <div class="feature-card" role="listitem">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>Seguridad y privacidad</h3>
-        <p>Autenticación segura con NextAuth v5, arquitectura multi-tenant con middleware de aislamiento, SSL, hosting en Vercel y base de datos en Supabase con Row Level Security.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════ COMO FUNCIONA ═ -->
-<section class="how" id="como-funciona" aria-labelledby="how-heading">
-  <div class="container">
-    <div class="section-header center">
-      <span class="section-label">Cómo funciona</span>
-      <h2 class="section-title" id="how-heading">Tu negocio listo en minutos</h2>
-      <p class="section-sub">Primer turno gestionado en menos de 10 minutos desde que te registrás.</p>
-    </div>
-
-    <div class="steps" role="list">
-      <div class="step" role="listitem">
-        <div class="step-num" aria-hidden="true">1</div>
-        <h4>Creá tu cuenta</h4>
-        <p>Registrate, completá el onboarding de 5 pasos y configurá tu negocio con el nombre, servicios y equipo.</p>
-      </div>
-      <div class="step" role="listitem">
-        <div class="step-num" aria-hidden="true">2</div>
-        <h4>Configurá tus servicios</h4>
-        <p>Agregá servicios con nombre, duración y precio. Asignalos a los profesionales correspondientes.</p>
-      </div>
-      <div class="step" role="listitem">
-        <div class="step-num" aria-hidden="true">3</div>
-        <h4>Compartí tu link</h4>
-        <p>Enviá <strong>limonada.online/tu-negocio</strong> por Instagram, WhatsApp o tu bio. Los clientes reservan solos.</p>
-      </div>
-      <div class="step" role="listitem">
-        <div class="step-num" aria-hidden="true">4</div>
-        <h4>Gestioná desde el panel</h4>
-        <p>Confirmá, completá y cobrá desde la agenda. Los reportes se generan automáticamente.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════ BOOKING ══ -->
-<section class="booking-section" aria-labelledby="booking-heading">
-  <div class="container">
-    <div class="booking-inner">
-      <div>
-        <span class="section-label">Reserva pública</span>
-        <h2 class="section-title" id="booking-heading">Tu cliente reserva solo, a cualquier hora</h2>
-        <p class="section-sub">Una página personalizada donde tus clientes eligen, agendan y confirman. Sin que intervengas. Sin instalar nada.</p>
-        <div class="booking-steps" role="list">
-          <div class="booking-step" role="listitem">
-            <div class="booking-step-dot" aria-hidden="true">1</div>
-            <span class="booking-step-text">Elige el <strong style="color:#fff">servicio</strong> que quiere</span>
-          </div>
-          <div class="booking-step" role="listitem">
-            <div class="booking-step-dot" aria-hidden="true">2</div>
-            <span class="booking-step-text">Selecciona su <strong style="color:#fff">profesional preferido</strong> (o "cualquiera disponible")</span>
-          </div>
-          <div class="booking-step" role="listitem">
-            <div class="booking-step-dot" aria-hidden="true">3</div>
-            <span class="booking-step-text">Elige <strong style="color:#fff">fecha y horario</strong> disponible en tiempo real</span>
-          </div>
-          <div class="booking-step" role="listitem">
-            <div class="booking-step-dot" aria-hidden="true">4</div>
-            <span class="booking-step-text">Ingresa nombre, email y teléfono y <strong style="color:#fff">confirma</strong></span>
-          </div>
-        </div>
-        <div style="margin-top:32px;">
-          <a href="#" class="btn btn-primary btn-lg">Crear mi link de reservas</a>
-        </div>
-      </div>
-
-      <!-- Phone mockup -->
-      <div class="booking-phone" aria-hidden="true">
-        <div class="phone-shell">
-          <div class="phone-screen">
-            <div class="phone-header">
-              <div class="phone-logo">Limonada</div>
-              <div class="phone-biz">Barbería El Maestro</div>
-            </div>
-            <div class="phone-step-label">Elegí tu servicio</div>
-            <div class="phone-service-cards">
-              <div class="phone-service-card selected">
-                <div>
-                  <div class="psvc-name">Corte de pelo</div>
-                  <div class="psvc-dur">30 min</div>
-                </div>
-                <div class="psvc-price">$3.500</div>
-              </div>
-              <div class="phone-service-card">
-                <div>
-                  <div class="psvc-name">Barba</div>
-                  <div class="psvc-dur">20 min</div>
-                </div>
-                <div class="psvc-price">$2.500</div>
-              </div>
-              <div class="phone-service-card">
-                <div>
-                  <div class="psvc-name">Corte + barba</div>
-                  <div class="psvc-dur">50 min</div>
-                </div>
-                <div class="psvc-price">$5.500</div>
-              </div>
-            </div>
-            <div class="phone-btn">Siguiente →</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════ INTEGRACIONES ═ -->
-<section class="integrations" aria-labelledby="integrations-heading">
-  <div class="container">
-    <div class="section-header center">
-      <span class="section-label">Integraciones</span>
-      <h2 class="section-title" id="integrations-heading">Se conecta con las herramientas que ya usás</h2>
-      <p class="section-sub">Nativo en la nube, sin fricción y con las integraciones que importan para tu negocio.</p>
-    </div>
-    <div class="integration-logos" role="list">
-      <div class="int-logo" role="listitem">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-label="MercadoPago" role="img" fill="none" stroke="#009EE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        MercadoPago
-      </div>
-      <div class="int-logo" role="listitem">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-label="WhatsApp" role="img" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-        WhatsApp / Twilio
-      </div>
-      <div class="int-logo" role="listitem">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-label="Google Calendar" role="img" fill="none" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Google Calendar
-      </div>
-      <div class="int-logo" role="listitem">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-label="Email / Resend" role="img" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Email / Resend
-      </div>
-      <div class="int-logo" role="listitem">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-label="Google OAuth" role="img" fill="none" stroke="#EA4335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12.05c0-.78-.07-1.53-.19-2.25H12v4.26h6.17c-.27 1.4-1.07 2.59-2.27 3.39v2.82h3.68C21.62 18.27 23 15.38 23 12.05z"/><path d="M12 23c3.24 0 5.95-1.07 7.94-2.91l-3.68-2.82c-1.07.72-2.45 1.14-4.26 1.14-3.27 0-6.04-2.21-7.03-5.18H1.17v2.92C3.15 20.43 7.26 23 12 23z"/><path d="M4.97 13.23A7.007 7.007 0 014.55 11c0-.78.13-1.54.42-2.23V5.85H1.17A11.012 11.012 0 000 11c0 1.78.43 3.47 1.17 4.96l3.8-2.73z"/><path d="M12 4.59c1.83 0 3.48.63 4.78 1.87L19.9 3.34C17.95 1.52 15.24.45 12 .45 7.26.45 3.15 3.02 1.17 7.04l3.8 2.73C5.96 6.8 8.73 4.59 12 4.59z"/></svg>
-        Google OAuth
-      </div>
-      <div class="int-logo" role="listitem">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-label="Vercel" role="img" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 20 2 20"/></svg>
-        Vercel
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════ PRECIOS ══ -->
-<section id="precios" aria-labelledby="pricing-heading">
-  <div class="container">
-    <div class="section-header center">
-      <span class="section-label">Precios</span>
-      <h2 class="section-title" id="pricing-heading">Planes para cada etapa de tu negocio</h2>
-      <p class="section-sub">14 días gratis, sin tarjeta de crédito. Cancelás cuando quieras.</p>
-    </div>
-
-    <div class="pricing-grid" role="list">
-
-      <div class="pricing-card" role="listitem">
-        <div class="plan-name">Starter</div>
-        <div class="plan-price"><sup>$</sup>0<span class="plan-period">/mes</span></div>
-        <p class="plan-desc">Para probar la plataforma y dar los primeros pasos.</p>
-        <ul class="plan-features" aria-label="Incluye">
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            1 profesional
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Agenda digital
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Link de reservas público
-          </li>
-          <li>
-            <svg class="check muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" aria-label="No incluido"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            <span style="color:var(--text-muted)">Notificaciones automáticas</span>
-          </li>
-          <li>
-            <svg class="check muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" aria-label="No incluido"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            <span style="color:var(--text-muted)">Reportes avanzados</span>
-          </li>
-          <li>
-            <svg class="check muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" aria-label="No incluido"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            <span style="color:var(--text-muted)">Pagos MercadoPago</span>
-          </li>
+      <div class="problema-copy">
+        <h2 class="sec-title" id="h2-problema">Coordinar por chat no escala</h2>
+        <p>Cada turno son mensajes de ida y vuelta mientras atendés. Los que te escriben fuera de horario esperan. Los que se olvidan del turno, no vienen. Y la agenda vive en un papel que solo entendés vos.</p>
+        <p><strong>Limonada da vuelta el mostrador:</strong> compartís tu link una sola vez y los turnos entran solos, sobre tu disponibilidad real.</p>
+        <ul class="vs-list">
+          <li><span class="antes">Turnos por chat a toda hora</span><span class="despues">Reservas online 24/7, solas</span></li>
+          <li><span class="antes">Agenda en papel o Excel</span><span class="despues">Calendario digital en tiempo real</span></li>
+          <li><span class="antes">Clientes que se olvidan</span><span class="despues">Recordatorios automáticos</span></li>
+          <li><span class="antes">Comisiones a mano</span><span class="despues">Reporte automático por profesional</span></li>
+          <li><span class="antes">Sin saber cuánto facturás</span><span class="despues">Reportes en tiempo real</span></li>
         </ul>
-        <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Empezar gratis</a>
       </div>
-
-      <div class="pricing-card featured" role="listitem">
-        <span class="pricing-badge">Más popular</span>
-        <div class="plan-name">Pro</div>
-        <div class="plan-price"><sup>$</sup>24.300<span class="plan-period">/mes</span></div>
-        <p class="plan-desc">Para negocios en crecimiento que quieren automatizar todo.</p>
-        <ul class="plan-features" aria-label="Incluye">
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Hasta 5 profesionales
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Todo lo del plan Starter
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Notificaciones WhatsApp + email
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Pagos con MercadoPago
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Google Calendar sync
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Reportes + comisiones
-          </li>
-        </ul>
-        <a href="https://app.limonada.online" class="btn btn-primary" style="width:100%;justify-content:center;">Probar 14 días gratis</a>
-      </div>
-
-      <div class="pricing-card" role="listitem">
-        <div class="plan-name">Business</div>
-        <div class="plan-price"><sup>$</sup>44.500<span class="plan-period">/mes</span></div>
-        <p class="plan-desc">Para cadenas y negocios con múltiples sucursales y equipo grande.</p>
-        <ul class="plan-features" aria-label="Incluye">
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Profesionales ilimitados
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Todo lo del plan Pro
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Multi-sucursal
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Exportación PDF/CSV
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Soporte prioritario
-          </li>
-          <li>
-            <svg class="check green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Onboarding personalizado
-          </li>
-        </ul>
-        <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Hablar con ventas</a>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════ TESTIMONIOS ═ -->
-<section class="testimonials" id="testimonios" aria-labelledby="testi-heading">
+<!-- ════ CÓMO FUNCIONA ════ -->
+<section class="pasos" id="como-funciona" aria-labelledby="h2-pasos">
   <div class="container">
-    <div class="section-header center">
-      <span class="section-label">Testimonios</span>
-      <h2 class="section-title" id="testi-heading">Lo que dicen nuestros clientes</h2>
-      <p class="section-sub">Negocios reales de Latinoamérica que ya transformaron su forma de trabajar.</p>
+    <h2 class="sec-title" id="h2-pasos"><span class="misreg" data-text="Listo en minutos"><span>Listo en minutos</span></span></h2>
+    <p class="sec-sub">De registrarte a tu primer turno gestionado, en menos de diez minutos.</p>
+    <div class="pasos-grid">
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">1</div>
+        <h3>Creá tu cuenta</h3>
+        <p>Nombre del negocio, servicios, equipo y horarios. Cinco pasos guiados.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">2</div>
+        <h3>Cargá tus servicios</h3>
+        <p>Nombre, duración y precio. Asignás cuáles hace cada profesional.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">3</div>
+        <h3>Compartí tu link</h3>
+        <p>limonada.online/tu-negocio por Instagram o donde hables con tus clientes.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">4</div>
+        <h3>Gestioná desde el panel</h3>
+        <p>Confirmá, completá y cobrá. Los reportes se arman solos.</p>
+      </div>
     </div>
-
-    <div class="testi-grid" role="list">
-
-      <div class="testi-card" role="listitem">
-        <div class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <p class="testi-text">"Antes perdía 2 horas al día respondiendo WhatsApp. Ahora los clientes reservan solos y yo solo abro la agenda. Recuperé ese tiempo para dedicarme a lo que realmente importa."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:#111111;" aria-hidden="true">M</div>
-          <div>
-            <div class="testi-name">Marcos Rodríguez</div>
-            <div class="testi-role">Dueño · Barbería El Maestro, CABA</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card" role="listitem">
-        <div class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <p class="testi-text">"Los recordatorios automáticos redujeron mis ausencias en un 60%. Los clientes que antes se olvidaban ahora llegan puntual. La diferencia en ingresos es notable mes a mes."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:#10B981;" aria-hidden="true">S</div>
-          <div>
-            <div class="testi-name">Sofía Méndez</div>
-            <div class="testi-role">Dueña · Studio Nail Bar, Rosario</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card" role="listitem">
-        <div class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <p class="testi-text">"Tengo 3 sucursales y antes era un caos coordinar todo. Con Limonada veo en tiempo real qué pasa en cada local. Las comisiones que antes tardaba días en calcular ahora las descargo en segundos."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:#D4A800;" aria-hidden="true">L</div>
-          <div>
-            <div class="testi-name">Laura Pineda</div>
-            <div class="testi-role">Dueña · Salón Lumière (3 locales), Córdoba</div>
-          </div>
-        </div>
-      </div>
-
+    <div class="pasos-cta">
+      <a class="btn btn-ink" href="https://app.limonada.online">Crear mi link de reservas</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════ FINAL CTA ═ -->
-<section class="final-cta" aria-labelledby="cta-heading">
+<!-- ════ FUNCIONALIDADES ════ -->
+<section class="funcs" id="funcionalidades" aria-labelledby="h2-funcs">
   <div class="container">
-    <span class="section-label" style="color:var(--secondary);">Empezá hoy</span>
-    <h2 class="section-title" id="cta-heading" style="margin-bottom:16px;">Tu negocio merece<br>herramientas profesionales</h2>
-    <p class="section-sub">Configurate en 10 minutos. Tu primer turno gestionado por Limonada hoy mismo.</p>
-    <div class="cta-actions">
-      <a href="https://app.limonada.online" class="btn btn-primary btn-lg">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Crear mi cuenta gratis
-      </a>
-      <a href="#funcionalidades" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.3);">
-        Ver funcionalidades
-      </a>
+    <h2 class="sec-title" id="h2-funcs">Todo lo que usa tu mostrador</h2>
+    <p class="sec-sub">Pensado para que ninguna operación te tome más de unos clics — la simplicidad es el producto.</p>
+    <div class="func-cols">
+      <div class="func">
+        <div class="func-name">Agenda inteligente</div>
+        <p>Vista semanal y diaria, por <strong>profesional o puesto</strong>. Creá, editá y cancelá turnos en tres clics.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Link de reserva público</div>
+        <p>Tu página en <strong>limonada.online/tu-negocio</strong>. Eligen servicio, profesional y horario sin registro obligatorio.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Notificaciones automáticas</div>
+        <p>Confirmaciones, recordatorios y cancelaciones por <strong>email</strong>, con la anticipación que definas.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Reportes y métricas</div>
+        <p>Ingresos, ocupación, cancelaciones y <strong>comisiones por empleado</strong>, en tiempo real.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Gestión de equipo</div>
+        <p>Comisiones por porcentaje, fijas o mixtas. Horarios y servicios por profesional.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Multi-sucursal</div>
+        <p>Varias ubicaciones desde un panel, cada una con sus horarios, puestos y profesionales.</p>
+      </div>
     </div>
-    <p class="cta-note">14 días gratis · Sin tarjeta de crédito · Cancelás cuando quieras</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════ FOOTER ═══ -->
-<footer role="contentinfo">
+<!-- ════ DEMO AGENDA ════ -->
+<section class="demo" aria-labelledby="h2-demo">
   <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="#" class="nav-logo" aria-label="Limonada inicio">
-          <img src="Gemini_Generated_Image_4uuu84uuu84uuu84-Photoroom.png" alt="Limonada logo" />
-          Limonada
-        </a>
-        <p>La plataforma de gestión de turnos para negocios de cuidado personal en Latinoamérica.</p>
-        <p style="margin-top:8px;">Un producto de <a href="https://soluway.com.ar" style="color:var(--secondary);text-decoration:underline;" target="_blank" rel="noopener">Soluway.com.ar</a></p>
+    <div class="demo-grid">
+      <div class="demo-copy">
+        <h2 class="sec-title" id="h2-demo">Tu día, de un vistazo</h2>
+        <p class="sec-sub">Quién viene, a qué hora, con quién y en qué estado. Los recordatorios salen solos y las ausencias se achican, sin que toques nada.</p>
+        <a class="btn btn-ink" href="https://app.limonada.online">Ver mi agenda así</a>
       </div>
-      <div class="footer-col">
-        <h5>Producto</h5>
+      <svg class="demo-orn" width="130" height="130" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="45" fill="#F8F1DE" stroke="#111111" stroke-width="3"/>
+        <circle cx="50" cy="50" r="34" fill="none" stroke="#111111" stroke-width="2"/>
+        <g stroke="#111111" stroke-width="2.5">
+          <line x1="50" y1="18" x2="50" y2="82"/>
+          <line x1="18" y1="50" x2="82" y2="50"/>
+          <line x1="27.4" y1="27.4" x2="72.6" y2="72.6"/>
+          <line x1="72.6" y1="27.4" x2="27.4" y2="72.6"/>
+        </g>
+        <circle cx="50" cy="50" r="7" fill="#D4A800" stroke="#111111" stroke-width="2"/>
+      </svg>
+      <figure class="agenda-card" aria-label="Demo ilustrativa de la agenda">
+        <figcaption class="agenda-head">
+          Agenda · Martes
+          <small>Demo ilustrativa</small>
+        </figcaption>
+        <div class="turno">
+          <span class="turno-hora">10:00</span>
+          <span class="turno-info"><b>Rodrigo M.</b><span>Corte + barba · Lucas</span></span>
+          <span class="sello ok">Confirmado</span>
+        </div>
+        <div class="turno">
+          <span class="turno-hora">11:30</span>
+          <span class="turno-info"><b>Sofía G.</b><span>Coloración · Ana</span></span>
+          <span class="sello wait">Pendiente</span>
+        </div>
+        <div class="turno">
+          <span class="turno-hora">13:00</span>
+          <span class="turno-info"><b>Martín P.</b><span>Fade + diseño · Lucas</span></span>
+          <span class="sello ok">Confirmado</span>
+        </div>
+        <div class="turno">
+          <span class="turno-hora">15:00</span>
+          <span class="turno-info"><b>Lucía V.</b><span>Manicura · Carmen</span></span>
+          <span class="sello done">Completado</span>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PRECIOS ════ -->
+<section class="precios" id="precios" aria-labelledby="h2-precios">
+  <div class="container">
+    <h2 class="sec-title" id="h2-precios">Planes para cada etapa</h2>
+    <p class="sec-sub">14 días gratis, sin tarjeta de crédito. Cancelás cuando quieras.</p>
+    <div class="tarifas">
+      <div class="tarifa">
+        <h3>Starter</h3>
+        <div class="tarifa-precio">Gratis</div>
+        <p class="tarifa-para">Para probar la plataforma y dar los primeros pasos.</p>
         <ul>
-          <li><a href="#funcionalidades">Funcionalidades</a></li>
-          <li><a href="#como-funciona">Cómo funciona</a></li>
-          <li><a href="#precios">Precios</a></li>
-          <li><a href="#">Changelog</a></li>
+          <li>1 profesional</li>
+          <li>Agenda digital</li>
+          <li>Link de reservas público</li>
+          <li>Notificaciones automáticas</li>
+          <li class="no">Reportes avanzados</li>
         </ul>
+        <a class="btn btn-line" href="https://app.limonada.online">Empezar gratis</a>
       </div>
-      <div class="footer-col">
-        <h5>Empresa</h5>
+      <div class="tarifa pro">
+        <span class="stamp">Más popular</span>
+        <h3>Pro</h3>
+        <div class="tarifa-precio">$44.500<small>/mes</small></div>
+        <p class="tarifa-para">Para negocios en crecimiento que quieren automatizar todo.</p>
         <ul>
-          <li><a href="#">Sobre nosotros</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contacto</a></li>
-          <li><a href="#">Soporte</a></li>
+          <li>Hasta 5 profesionales</li>
+          <li>Todo lo del plan Starter</li>
+          <li>Reportes avanzados</li>
+          <li>Comisiones por profesional</li>
+          <li>Gestión de equipo</li>
         </ul>
+        <a class="btn btn-ink" href="https://app.limonada.online">Probar 14 días gratis</a>
       </div>
-      <div class="footer-col">
-        <h5>Legal</h5>
+      <div class="tarifa">
+        <h3>Business</h3>
+        <div class="tarifa-precio">$93.900<small>/mes</small></div>
+        <p class="tarifa-para">Para cadenas y negocios con múltiples sucursales.</p>
         <ul>
-          <li><a href="#">Términos de uso</a></li>
-          <li><a href="#">Privacidad</a></li>
-          <li><a href="#">Cookies</a></li>
+          <li>Profesionales ilimitados</li>
+          <li>Todo lo del plan Pro</li>
+          <li>Multi-sucursal</li>
+          <li>Soporte prioritario</li>
+          <li>Onboarding personalizado</li>
         </ul>
+        <a class="btn btn-line" href="https://app.limonada.online">Hablar con ventas</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Limonada by Soluway.io · Todos los derechos reservados</span>
-      <span>Hecho con cariño en Argentina</span>
+    <p class="precios-nota">Precios en pesos argentinos: sin sorpresas en dólares</p>
+  </div>
+</section>
+
+<!-- ════ CIERRE ════ -->
+<section class="cierre" aria-labelledby="h2-cierre">
+  <div class="container">
+    <svg class="cierre-orn" width="170" height="170" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <pattern id="ht" width="7" height="7" patternUnits="userSpaceOnUse">
+          <circle cx="3.5" cy="3.5" r="1.6" fill="#111111"/>
+        </pattern>
+      </defs>
+      <circle cx="45" cy="45" r="38" fill="#D4A800"/>
+      <circle cx="45" cy="45" r="38" fill="url(#ht)" opacity=".55"/>
+      <circle cx="55" cy="55" r="38" fill="none" stroke="#F5C518" stroke-width="2.5"/>
+    </svg>
+    <h2 id="h2-cierre"><span class="misreg" data-text="Colgá el cuaderno."><span>Colgá el cuaderno.</span></span></h2>
+    <p>Configurás tu negocio en diez minutos y tu link de reservas queda trabajando por vos, hoy mismo.</p>
+    <a class="btn btn-ink" href="https://app.limonada.online">Empezar gratis · 14 días</a>
+    <p class="cierre-nota">Sin tarjeta de crédito · Cancelás cuando quieras</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <div class="foot-logo">
+      <img src="logo-limonada.png" width="62" height="34" alt="" />
+      <b>LIMONADA</b>
+    </div>
+    <nav aria-label="Navegación del pie">
+      <ul>
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="https://app.limonada.online">Entrar a la app</a></li>
+        <li><a href="mailto:soluway.group@gmail.com">Soporte</a></li>
+      </ul>
+    </nav>
+    <div class="foot-meta">
+      <span>© 2026 Limonada · un producto de <a href="https://soluway.com.ar">Soluway</a></span>
+      <span>Términos y privacidad: en preparación</span>
+      <span>Hecho en Argentina</span>
     </div>
   </div>
 </footer>
 
-<script>
-  // Mobile menu (minimal)
-  const hamburger = document.querySelector('.nav-hamburger');
-  const navLinks  = document.querySelector('.nav-links');
-  const navCta    = document.querySelector('.nav-cta');
-
-  if (hamburger) {
-    hamburger.addEventListener('click', function () {
-      const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', String(!isOpen));
-
-      if (!isOpen) {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'fixed';
-        navLinks.style.top = '68px';
-        navLinks.style.left = '0';
-        navLinks.style.right = '0';
-        navLinks.style.background = 'rgba(250,245,255,.98)';
-        navLinks.style.padding = '20px 24px';
-        navLinks.style.borderBottom = '1px solid #EDE9FE';
-        navLinks.style.gap = '20px';
-        navLinks.style.zIndex = '99';
-      } else {
-        navLinks.style.display = '';
-        navLinks.style.cssText = '';
-      }
-    });
-  }
-</script>
 </body>
 </html>
