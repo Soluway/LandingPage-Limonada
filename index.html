@@ -5,8 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="logo-limonada.png" />
-  <title>Limonada — Turnos online para tu negocio</title>
-  <meta name="description" content="Tus clientes reservan solos por un link. Agenda, recordatorios y pagos para peluquerías, barberías, consultorios y todo negocio que vive de turnos." />
+  <title>Turnos online para peluquerías y barberías | Limonada</title>
+  <meta name="description" content="Tus clientes reservan solos por un link. Agenda online, recordatorios por email y reportes para peluquerías, barberías, estéticas y todo negocio con turnos." />
+  <link rel="canonical" href="https://limonada.online/" />
+  <meta name="theme-color" content="#F5C518" />
+
+  <!-- Vista previa al compartir el link (WhatsApp, Instagram, Facebook, LinkedIn). og-image.jpg es
+       una captura del hero a 1200×630; si cambia el hero, regenerarla. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Limonada" />
+  <meta property="og:url" content="https://limonada.online/" />
+  <meta property="og:title" content="Limonada — Tu agenda se llena sola" />
+  <meta property="og:description" content="Turnos online para peluquerías, barberías y estéticas. Tus clientes reservan por un link. Vos atendés." />
+  <meta property="og:image" content="https://limonada.online/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Limonada: tu agenda se llena sola. Turnos online para peluquerías, barberías y todo negocio que vive de turnos." />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Datos estructurados. Los precios tienen que coincidir con la sección #precios. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Limonada",
+    "url": "https://limonada.online/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "es-AR",
+    "description": "Sistema de turnos online para peluquerías, barberías, estéticas y negocios que trabajan con turnos. Página de reservas por link, agenda, recordatorios por email y reportes.",
+    "offers": [
+      { "@type": "Offer", "name": "Starter", "price": "0", "priceCurrency": "ARS" },
+      { "@type": "Offer", "name": "Pro", "price": "24900", "priceCurrency": "ARS" },
+      { "@type": "Offer", "name": "Business", "price": "54900", "priceCurrency": "ARS" }
+    ],
+    "publisher": { "@type": "Organization", "name": "Soluway" }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -192,6 +228,17 @@
       max-width: 11ch;
     }
     .hero h1 .misreg::before { color: var(--paper); }
+    .hero-kicker {
+      display: block;
+      width: max-content;
+      max-width: min(100%, 90vw);
+      margin: 0 0 22px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: .06em;
+      text-wrap: pretty;
+    }
     .hero-sub {
       max-width: 54ch;
       margin: 28px 0 0;
@@ -753,11 +800,14 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <!-- ════ HERO ════ -->
 <section class="hero" aria-labelledby="h1">
   <div class="container">
+    <!-- El H1 lleva lo que se busca ("turnos online para peluquerías…") además del slogan:
+         el slogan solo no dice qué es Limonada y lo usan otras apps de turnos. -->
     <h1 id="h1">
+      <span class="hero-kicker">Turnos online para peluquerías, barberías y estéticas</span>
       <span class="misreg" data-text="Tu agenda"><span>Tu agenda</span></span><br />
       <span class="misreg" data-text="se llena sola."><span>se llena sola.</span></span>
     </h1>
-    <p class="hero-sub">Turnos online para peluquerías, barberías, consultorios y todo negocio que vive de turnos. Tus clientes reservan por un link. Vos atendés.</p>
+    <p class="hero-sub">También para consultorios y todo negocio que vive de turnos. Tus clientes reservan por un link. Vos atendés.</p>
     <div class="hero-actions">
       <a class="btn btn-ink" href="https://app.limonada.online">Empezar gratis · 14 días</a>
       <span class="hero-note">Sin tarjeta de crédito</span>
@@ -870,7 +920,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       </div>
       <div class="func">
         <div class="func-name">Link de reserva público</div>
-        <p>Tu página en <strong>limonada.online/tu-negocio</strong>. Eligen servicio, profesional y horario sin registro obligatorio.</p>
+        <p>Tu página en <strong>app.limonada.online/tu-negocio</strong>. Eligen servicio, profesional y horario sin registro obligatorio.</p>
       </div>
       <div class="func">
         <div class="func-name">Notificaciones automáticas</div>
