@@ -1,0 +1,23 @@
+# Limonada
+
+> Limonada es un sistema de turnos online para peluquerías, barberías, consultorios y negocios de servicios en Argentina. Los clientes reservan solos desde un link y el negocio gestiona agenda, equipo y comisiones desde un panel. Es un producto de Soluway.
+
+## Qué hace
+- Página pública de reservas por link: el cliente elige servicio, profesional, fecha y hora, sin registro obligatorio.
+- Agenda en tiempo real por profesional o puesto.
+- Confirmaciones, recordatorios y cancelaciones por email.
+- Reportes de ingresos, ocupación y comisiones por profesional.
+- Gestión de equipo y multi-sucursal.
+
+## Planes (precios en pesos argentinos)
+- Starter: gratis, 1 profesional, hasta 60 turnos por mes.
+- Pro: $24.900/mes, hasta 3 profesionales, turnos ilimitados.
+- Business: $54.900/mes, profesionales ilimitados, multi-sucursal.
+- 14 días de prueba, sin tarjeta de crédito.
+
+## Enlaces
+- Sitio: https://limonada.online/
+- Aplicación: https://app.limonada.online/
+- Términos: https://app.limonada.online/legal/terminos
+- Privacidad: https://app.limonada.online/legal/privacidad
+- Soporte: soporte@limonada.online

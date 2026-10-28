@@ -20,17 +20,17 @@ Simplicidad extrema. Configurado en minutos, sin curva de aprendizaje y sin feat
 
 ## Operating Context
 
-- App del producto: https://app.limonada.online (CTA de la landing apunta ahí).
+- App del producto: https://app.limonada.online (CTA de la landing apunta ahí). Link público de reservas de cada negocio: `app.limonada.online/{slug}` (todos los planes); con landing por negocio activa (Pro/Business) redirige a `{slug}.limonada.online`. `limonada.online/{slug}` NO existe (404).
 - El cliente final del negocio reserva desde el celular vía un link público que el negocio comparte (WhatsApp/Instagram).
-- Mercado argentino: voseo, precios en pesos. Planes actuales (confirmados por Tiziano 2026-08-02, pisan cualquier valor anterior del repo): Starter gratis, Pro $44.500/mes, Business $93.900/mes.
-- Contacto/soporte: soluway.group@gmail.com — es la ÚNICA casilla real que existe; no hay mail propio de Limonada todavía.
+- Mercado argentino: voseo, precios en pesos. Planes vigentes (confirmados por Tiziano 2026-10-27, pisan cualquier valor anterior del repo): Starter gratis, Pro $24.900/mes, Business $54.900/mes.
+- Contacto/soporte: soporte@limonada.online (buzón Zoho del dominio, definido por Tiziano 2026-10-27). Es el mail público en sitio, schema y llms.txt; reemplaza a soluway.group@gmail.com en la landing.
 
 ## Capabilities and Constraints
 
 - Funcionalidad confirmada (según producto/copy existente): página pública de reservas por link, agenda en tiempo real, recordatorios automáticos, múltiples profesionales y sucursales, reportes/comisiones.
-- NO existen aún en la app (confirmado por Tiziano 2026-08-02): pagos con MercadoPago, sincronización con Google Calendar, notificaciones por WhatsApp, exportación PDF/CSV, roles diferenciados de equipo. Son roadmap — NO publicarlos como claims en ninguna pieza hasta que Tiziano confirme que shippearon. Las notificaciones existentes son por email.
+- NO existen aún en la app (confirmado por Tiziano 2026-08-02): pagos/cobro de turnos con MercadoPago (MercadoPago hoy solo cobra la suscripción de Limonada, no los turnos de los clientes finales; "pagos" y "cobrar" no se publican como claim), sincronización con Google Calendar, notificaciones por WhatsApp, exportación PDF/CSV, roles diferenciados de equipo. Son roadmap — NO publicarlos como claims en ninguna pieza hasta que Tiziano confirme que shippearon. Las notificaciones existentes son por email.
 - Landing: archivo estático único (index.html) servido por GitHub Pages con dominio custom (CNAME). Sin build step. Todo inline.
-- Repo git: nunca pushear a `origin`; solo al fork `ziano`.
+- Repo git: el deploy es por `origin` (`Soluway/LandingPage-Limonada`, alimenta GitHub Pages). Corregido 2026-10-27: la regla vieja de "solo al fork `ziano`" estaba desactualizada. Igual, no se pushea sin aprobación de Tiziano.
 
 ## Brand Commitments
 

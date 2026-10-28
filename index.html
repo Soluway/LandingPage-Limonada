@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="favicon.ico" sizes="any" />
-  <link rel="apple-touch-icon" href="logo-limonada.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title>Turnos online para peluquerías y barberías | Limonada</title>
   <meta name="description" content="Tus clientes reservan solos por un link. Agenda online, recordatorios por email y reportes para peluquerías, barberías, estéticas y todo negocio con turnos." />
   <link rel="canonical" href="https://limonada.online/" />
@@ -28,19 +28,49 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Limonada",
-    "url": "https://limonada.online/",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "inLanguage": "es-AR",
-    "description": "Sistema de turnos online para peluquerías, barberías, estéticas y negocios que trabajan con turnos. Página de reservas por link, agenda, recordatorios por email y reportes.",
-    "offers": [
-      { "@type": "Offer", "name": "Starter", "price": "0", "priceCurrency": "ARS" },
-      { "@type": "Offer", "name": "Pro", "price": "24900", "priceCurrency": "ARS" },
-      { "@type": "Offer", "name": "Business", "price": "54900", "priceCurrency": "ARS" }
-    ],
-    "publisher": { "@type": "Organization", "name": "Soluway" }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://limonada.online/#org",
+        "name": "Limonada",
+        "url": "https://limonada.online/",
+        "logo": "https://limonada.online/logo-limonada.png",
+        "description": "Limonada es un sistema de turnos online para peluquerías, barberías, consultorios y negocios de servicios en Argentina.",
+        "parentOrganization": { "@type": "Organization", "name": "Soluway", "url": "https://soluway.com.ar" },
+        "areaServed": "AR",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "soporte@limonada.online",
+          "availableLanguage": "es"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://limonada.online/#website",
+        "url": "https://limonada.online/",
+        "name": "Limonada",
+        "alternateName": ["Limonada turnos", "Limonada app de turnos"],
+        "inLanguage": "es-AR",
+        "publisher": { "@id": "https://limonada.online/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://limonada.online/#app",
+        "name": "Limonada",
+        "url": "https://limonada.online/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "inLanguage": "es-AR",
+        "description": "Sistema de turnos online para peluquerías, barberías, estéticas y negocios que trabajan con turnos. Página de reservas por link, agenda, recordatorios por email y reportes.",
+        "offers": [
+          { "@type": "Offer", "name": "Starter", "price": "0", "priceCurrency": "ARS" },
+          { "@type": "Offer", "name": "Pro", "price": "24900", "priceCurrency": "ARS" },
+          { "@type": "Offer", "name": "Business", "price": "54900", "priceCurrency": "ARS" }
+        ],
+        "publisher": { "@id": "https://limonada.online/#org" }
+      }
+    ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -894,12 +924,12 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <div class="paso">
         <div class="paso-num" aria-hidden="true">3</div>
         <h3>Compartí tu link</h3>
-        <p>limonada.online/tu-negocio por Instagram o donde hables con tus clientes.</p>
+        <p>app.limonada.online/tu-negocio por Instagram o donde hables con tus clientes.</p>
       </div>
       <div class="paso">
         <div class="paso-num" aria-hidden="true">4</div>
         <h3>Gestioná desde el panel</h3>
-        <p>Confirmá, completá y cobrá. Los reportes se arman solos.</p>
+        <p>Confirmá y completá cada turno. Los reportes se arman solos.</p>
       </div>
     </div>
     <div class="pasos-cta">
@@ -1079,12 +1109,12 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <li><a href="#como-funciona">Cómo funciona</a></li>
         <li><a href="#precios">Precios</a></li>
         <li><a href="https://app.limonada.online">Entrar a la app</a></li>
-        <li><a href="mailto:soluway.group@gmail.com">Soporte</a></li>
+        <li><a href="mailto:soporte@limonada.online">Soporte</a></li>
       </ul>
     </nav>
     <div class="foot-meta">
       <span>© 2026 Limonada · un producto de <a href="https://soluway.com.ar">Soluway</a></span>
-      <span>Términos y privacidad: en preparación</span>
+      <span><a href="https://app.limonada.online/legal/terminos">Términos</a> · <a href="https://app.limonada.online/legal/privacidad">Privacidad</a></span>
       <span>Hecho en Argentina</span>
     </div>
   </div>
