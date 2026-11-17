@@ -73,9 +73,17 @@
     ]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <!-- Fuentes self-hosteadas (subset latin de Google Fonts, licencia OFL). Antes se cargaban
+       con el CSS de fonts.googleapis.com, que bloqueaba el render (~0,8 s de LCP en mobile).
+       Se precargan las dos que pinta el primer viewport: Poppins 800 (H1) y Open Sans (cuerpo). -->
+  <link rel="preload" href="/fonts/poppins-800-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/open-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 400 700; font-stretch: 100%; font-display: swap; src: url(/fonts/open-sans-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/poppins-600-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/poppins-700-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 800; font-display: swap; src: url(/fonts/poppins-800-latin.woff2) format('woff2'); }
+  </style>
   <style>
     :root {
       --paper:      #F8F1DE;
@@ -330,7 +338,7 @@
       line-height: 1;
     }
     .stub:last-child .stub-step { color: var(--ink-y); }
-    .stub h3 { font-size: 15px; margin: 10px 0 6px; }
+    .stub h2 { font-size: 15px; margin: 10px 0 6px; }
     .stub:last-child h3 { color: var(--paper); }
     .stub p { font-size: 13.5px; line-height: 1.45; }
     .stub:last-child p { color: var(--paper-deep); }
@@ -663,11 +671,12 @@
       transform: rotate(-45deg);
     }
     .tarifa.pro li::before { border-color: var(--ink-k); }
-    .tarifa li.no { opacity: .45; }
+    /* Antes opacity .45 (2,47:1, falla WCAG AA). #696352 sobre #FFFDF4 da 5,9:1. */
+    .tarifa li.no { color: #696352; }
     .tarifa li.no::before {
       border: none;
       width: 12px; height: 2.5px;
-      background: var(--ink-body);
+      background: #696352;
       top: 16px;
       transform: none;
     }
@@ -811,7 +820,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <header>
   <div class="mast">
     <a href="#" class="mast-logo" aria-label="Limonada — inicio">
-      <img src="logo-limonada.png" width="62" height="34" alt="" />
+      <img src="logo-limonada-header.webp" width="62" height="34" alt="" />
       LIMONADA
     </a>
     <nav aria-label="Navegación principal">
@@ -846,22 +855,22 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div class="stub-strip" role="list" aria-label="Así reserva tu cliente">
       <div class="stub" role="listitem">
         <div class="stub-step" aria-hidden="true">1</div>
-        <h3>Elige el servicio</h3>
+        <h2>Elige el servicio</h2>
         <p>De tu lista, con duración y precio a la vista.</p>
       </div>
       <div class="stub" role="listitem">
         <div class="stub-step" aria-hidden="true">2</div>
-        <h3>Elige profesional</h3>
+        <h2>Elige profesional</h2>
         <p>Su preferido, o "cualquiera disponible".</p>
       </div>
       <div class="stub" role="listitem">
         <div class="stub-step" aria-hidden="true">3</div>
-        <h3>Elige fecha y hora</h3>
+        <h2>Elige fecha y hora</h2>
         <p>Sobre tu disponibilidad real, en tiempo real.</p>
       </div>
       <div class="stub" role="listitem">
         <div class="stub-step" aria-hidden="true">4</div>
-        <h3>Turno confirmado</h3>
+        <h2>Turno confirmado</h2>
         <p>Le llega la confirmación. A vos, el turno en la agenda.</p>
       </div>
     </div>
@@ -1100,7 +1109,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <footer>
   <div class="container foot">
     <div class="foot-logo">
-      <img src="logo-limonada.png" width="62" height="34" alt="" />
+      <img src="logo-limonada-header.webp" width="62" height="34" alt="" />
       <b>LIMONADA</b>
     </div>
     <nav aria-label="Navegación del pie">
