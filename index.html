@@ -598,6 +598,81 @@
     .sello.wait { color: var(--ink-k); background: var(--ink-y); border-color: var(--ink-k); }
     .sello.done { color: var(--ink-body); opacity: .6; }
 
+    /* ── rubro: barberías (tinta negra) ── */
+    .rubro {
+      background: var(--ink-k);
+      border-top: 2px solid var(--ink-k);
+      border-bottom: 2px solid var(--ink-k);
+      color: var(--paper-deep);
+    }
+    .rubro .sec-kicker {
+      font: 700 13.5px/1 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-y);
+      margin-bottom: 18px;
+    }
+    .rubro .sec-title { color: var(--paper); }
+    .rubro .sec-title .misreg::before { color: var(--ink-y); }
+    .rubro-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .rubro-copy > p { font-size: 18px; max-width: 52ch; margin-bottom: 30px; }
+    .rubro-copy > p strong { color: var(--paper); }
+    .rubro-list { list-style: none; margin: 0 0 36px; border-top: 2px dashed var(--ink-body); }
+    .rubro-list li { padding: 16px 0; border-bottom: 2px dashed var(--ink-body); }
+    .rubro-list b {
+      display: block;
+      font: 700 15px/1.2 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: var(--ink-y);
+      margin-bottom: 4px;
+    }
+    .rubro .btn-ink { box-shadow: 5px 5px 0 var(--ink-y-deep); }
+    .rubro .btn-ink:hover { box-shadow: 8px 8px 0 var(--ink-y-deep); }
+    /* lista de servicios: cartel de precios de barbería, con puntos líder */
+    .cartel {
+      background: #FFFDF4;
+      border: 2px solid var(--ink-k);
+      box-shadow: 7px 7px 0 var(--ink-y-deep);
+      transform: rotate(1deg);
+      padding: 28px 26px 22px;
+      color: var(--ink-body);
+    }
+    .cartel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding-bottom: 14px;
+      margin-bottom: 8px;
+      border-bottom: 2px solid var(--ink-k);
+      font: 800 20px/1 'Poppins', sans-serif;
+      text-transform: uppercase;
+      color: var(--ink-k);
+    }
+    .cartel-head small { font: 700 11px/1 'Open Sans', sans-serif; letter-spacing: .08em; color: var(--gold-text); }
+    .cartel ul { list-style: none; margin: 0; }
+    .cartel li { display: flex; align-items: baseline; gap: 8px; padding: 11px 0; font-size: 15.5px; }
+    .cartel li::after { content: ''; order: 2; flex: 1; border-bottom: 2px dotted var(--ink-y-deep); transform: translateY(-4px); }
+    .cartel .srv { order: 1; font-weight: 600; color: var(--ink-k); }
+    .cartel .min { order: 3; font: 700 13.5px/1 'Poppins', sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--gold-text); white-space: nowrap; }
+    .cartel-pie {
+      margin-top: 12px;
+      padding-top: 14px;
+      border-top: 2px dashed var(--ink-k);
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    @media (max-width: 860px) {
+      .rubro-grid { grid-template-columns: 1fr; gap: 48px; }
+      .cartel { max-width: 440px; }
+    }
+
     /* ── precios: etiquetas de tarifa ── */
     .precios { background: var(--paper); }
     .tarifas {
@@ -1031,6 +1106,39 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </div>
 </section>
 
+<!-- ════ PARA BARBERÍAS ════
+     Sección por rubro dentro de la home (decisión: una sola URL). Cuando haya más rubros,
+     esta sección pasa a ser "Para tu rubro" con un bloque por cada uno. -->
+<section class="rubro" id="barberias" aria-labelledby="h2-barberias">
+  <div class="container">
+    <div class="rubro-grid">
+      <div class="rubro-copy">
+        <p class="sec-kicker">Agenda de turnos para barberías</p>
+        <h2 class="sec-title" id="h2-barberias"><span class="misreg" data-text="Vos cortás. El link agenda."><span>Vos cortás. El link agenda.</span></span></h2>
+        <p>En una barbería los turnos son cortos y seguidos, y cada "¿tenés lugar?" lo contestás con la máquina en la mano. <strong>Con Limonada el cliente ve las sillas libres y se anota solo.</strong></p>
+        <ul class="rubro-list">
+          <li><b>Cada corte, su tiempo</b>Un corte no dura lo mismo que corte + barba: cada servicio ocupa su duración real y los turnos no se pisan.</li>
+          <li><b>El barbero que elige el cliente</b>El de siempre, o "cualquiera disponible" para llenar el próximo hueco.</li>
+          <li><b>Los que entran sin turno</b>Los cargás en tres clics y ese horario deja de aparecer en el link.</li>
+          <li><b>Comisiones por barbero</b>Por porcentaje, fijas o mixtas. A fin de mes el número ya está.</li>
+        </ul>
+        <a class="btn btn-ink" href="https://app.limonada.online">Crear el link de mi barbería</a>
+      </div>
+      <figure class="cartel" aria-label="Ejemplo de lista de servicios de una barbería">
+        <figcaption class="cartel-head">Servicios <small>Ejemplo</small></figcaption>
+        <ul>
+          <li><span class="srv">Corte</span><span class="min">30 min</span></li>
+          <li><span class="srv">Fade</span><span class="min">40 min</span></li>
+          <li><span class="srv">Arreglo de barba</span><span class="min">20 min</span></li>
+          <li><span class="srv">Corte + barba</span><span class="min">50 min</span></li>
+          <li><span class="srv">Fade + diseño</span><span class="min">60 min</span></li>
+        </ul>
+        <p class="cartel-pie">La agenda arma los horarios libres con estas duraciones, sola.</p>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ════ PRECIOS ════ -->
 <section class="precios" id="precios" aria-labelledby="h2-precios">
   <div class="container">
@@ -1117,6 +1225,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <li><a href="#funcionalidades">Funcionalidades</a></li>
         <li><a href="#como-funciona">Cómo funciona</a></li>
         <li><a href="#precios">Precios</a></li>
+        <li><a href="#barberias">Para barberías</a></li>
         <li><a href="https://app.limonada.online">Entrar a la app</a></li>
         <li><a href="mailto:soporte@limonada.online">Soporte</a></li>
       </ul>
