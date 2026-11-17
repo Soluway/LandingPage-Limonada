@@ -9,6 +9,9 @@
 - Reportes de ingresos, ocupación y comisiones por profesional.
 - Gestión de equipo y multi-sucursal.
 
+## Para barberías
+- Agenda de turnos para barberías: cada servicio (corte, fade, barba, corte + barba) con su duración, el cliente elige su barbero o "cualquiera disponible", los que entran sin turno se cargan a mano y bloquean ese horario, y comisiones por barbero. Detalle: https://limonada.online/#barberias
+
 ## Planes (precios en pesos argentinos)
 - Starter: gratis, 1 profesional, hasta 60 turnos por mes.
 - Pro: $24.900/mes, hasta 3 profesionales, turnos ilimitados.
