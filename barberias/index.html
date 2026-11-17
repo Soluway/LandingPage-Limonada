@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <title>Agenda de turnos para barberías | Limonada</title>
+  <meta name="description" content="Agenda online para barberías: tus clientes reservan corte, barba y barbero desde un link, a cualquier hora. Recordatorios por email. Gratis para empezar." />
+  <link rel="canonical" href="https://limonada.online/barberias/" />
+  <meta name="theme-color" content="#F5C518" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Limonada" />
+  <meta property="og:url" content="https://limonada.online/barberias/" />
+  <meta property="og:title" content="Agenda de turnos para barberías — Limonada" />
+  <meta property="og:description" content="Tus clientes eligen corte, barbero y horario desde un link. Vos seguís cortando." />
+  <meta property="og:image" content="https://limonada.online/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Limonada: turnos online para barberías, peluquerías y todo negocio que vive de turnos." />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Página de rubro (piloto). Los precios tienen que coincidir con /#precios y con plans.ts de la
+       app; las preguntas del FAQPage, con la sección #preguntas de abajo. El CSS es copia del de la
+       home: si cambia allá, cambia acá (cuando haya más rubros, conviene extraerlo a un archivo). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://limonada.online/barberias/#webpage",
+        "url": "https://limonada.online/barberias/",
+        "name": "Agenda de turnos para barberías | Limonada",
+        "inLanguage": "es-AR",
+        "isPartOf": {
+          "@id": "https://limonada.online/#website"
+        },
+        "about": {
+          "@id": "https://limonada.online/#app"
+        },
+        "breadcrumb": {
+          "@id": "https://limonada.online/barberias/#breadcrumb"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://limonada.online/barberias/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Limonada",
+            "item": "https://limonada.online/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Barberías",
+            "item": "https://limonada.online/barberias/"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://limonada.online/barberias/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Mis clientes se tienen que bajar una app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Reservan desde el link de tu barbería, en el navegador del celular, sin registro obligatorio. Eligen el corte, el barbero y el horario, y listo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Puedo seguir atendiendo a los que entran sin turno?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. La agenda es tuya: al que entra por la puerta o te escribe igual lo cargás en tres clics, y ese horario deja de aparecer en el link para el resto."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cada barbero tiene su propia agenda?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Cada barbero tiene sus días, sus horarios y los servicios que hace, y la agenda se puede ver por barbero. El cliente elige con quién se atiende o reserva con cualquiera disponible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa con los clientes que no vienen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Limonada le manda un email de confirmación al reservar y un recordatorio antes del turno, con la anticipación que definas. No hace milagros, pero el que se olvidaba ahora se entera."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto cuesta para una barbería?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Si trabajás solo, el plan Starter es gratis: un barbero y hasta 60 turnos por mes. Pro cuesta $24.900 por mes, para hasta tres barberos y turnos ilimitados. Business cuesta $54.900 por mes, con barberos ilimitados y varias sucursales. Los precios son en pesos y los planes pagos tienen 14 días de prueba sin tarjeta."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tardo en tenerlo andando?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Menos de diez minutos. Cargás el nombre de la barbería, tus cortes, tus barberos y los horarios, y el link queda listo para pegar en la bio de Instagram."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <!-- Fuentes self-hosteadas (subset latin de Google Fonts, licencia OFL). Antes se cargaban
+       con el CSS de fonts.googleapis.com, que bloqueaba el render (~0,8 s de LCP en mobile).
+       Se precargan las dos que pinta el primer viewport: Poppins 800 (H1) y Open Sans (cuerpo). -->
+  <link rel="preload" href="/fonts/poppins-800-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/open-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 400 700; font-stretch: 100%; font-display: swap; src: url(/fonts/open-sans-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/poppins-600-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/poppins-700-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 800; font-display: swap; src: url(/fonts/poppins-800-latin.woff2) format('woff2'); }
+  </style>
+  <style>
+    :root {
+      --paper:      #F8F1DE;
+      --paper-deep: #F0E6C8;
+      --ink-y:      #F5C518;
+      --ink-y-deep: #D4A800;
+      --ink-k:      #111111;
+      --ink-body:   #3B3629;
+      --gold-text:  #7A5A06;
+      --success:    #0E7A55;
+
+      --shadow-reg: 5px 5px 0 var(--ink-k);
+      --t: 200ms cubic-bezier(.22,.9,.35,1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16.5px;
+      line-height: 1.6;
+      color: var(--ink-body);
+      background: var(--paper);
+    }
+
+    /* grano de papel — una sola capa fija, barata */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 90;
+      opacity: .5;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* densidad de tinta: mottle sobre los campos impresos */
+    .hero, .demo, .pasos, .cierre { position: relative; }
+    .hero::before, .demo::before, .pasos::before, .cierre::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23m)'/%3E%3C/svg%3E");
+    }
+    .hero::before, .demo::before { mix-blend-mode: multiply; opacity: .14; }
+    .pasos::before, .cierre::before { mix-blend-mode: screen; opacity: .10; }
+    .hero .container, .demo .container, .pasos .container, .cierre .container { position: relative; z-index: 1; }
+
+    h1, h2, h3, .display {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: .95;
+      letter-spacing: -.02em;
+      color: var(--ink-k);
+      text-wrap: balance;
+    }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--ink-k); outline-offset: 3px; }
+
+    /* ── titular desregistrado: pasada amarilla debajo de la negra ── */
+    .misreg {
+      position: relative;
+      display: inline-block;
+    }
+    .misreg > span {
+      position: relative;
+      z-index: 2;
+    }
+    .misreg::before {
+      content: attr(data-text) / "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      color: var(--ink-y);
+      transform: translate(6px, 5px);
+      animation: settle 700ms cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes settle {
+      from { transform: translate(18px, 14px); }
+      to   { transform: translate(6px, 5px); }
+    }
+
+    /* ── botones ticket ── */
+    .btn {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      font-size: 15px;
+      text-decoration: none;
+      padding: 15px 30px;
+      border: 2px solid var(--ink-k);
+      cursor: pointer;
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .btn-ink {
+      background: var(--ink-y);
+      color: var(--ink-k);
+      box-shadow: var(--shadow-reg);
+    }
+    .btn-ink:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--ink-k);
+    }
+    .btn-ink:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--ink-k);
+    }
+    .btn-line {
+      background: transparent;
+      color: var(--ink-k);
+      box-shadow: none;
+    }
+    .btn-line:hover { background: var(--ink-k); color: var(--paper); }
+    .on-ink .btn-line { border-color: var(--ink-k); }
+
+    /* ── masthead ── */
+    header {
+      border-bottom: 2px solid var(--ink-k);
+      background: var(--paper);
+    }
+    .mast {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 14px 24px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .mast-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: .04em;
+      color: var(--ink-k);
+    }
+    .mast-logo img { height: 34px; width: auto; display: block; }
+    .mast nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .mast nav a {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-decoration: none;
+      color: var(--ink-k);
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+      cursor: pointer;
+      transition: border-color var(--t);
+    }
+    .mast nav a:hover { border-color: var(--ink-y-deep); }
+    .mast .btn { padding: 10px 20px; font-size: 13px; }
+
+    /* ── hero: campo de tinta amarilla ── */
+    .hero {
+      background: var(--ink-y);
+      border-bottom: 2px solid var(--ink-k);
+      padding: 72px 0 0;
+      overflow: hidden;
+    }
+    .hero .container { position: relative; }
+    .hero h1 {
+      font-size: clamp(3rem, 8.5vw, 6rem);
+      max-width: 11ch;
+    }
+    .hero h1 .misreg::before { color: var(--paper); }
+    .hero-kicker {
+      display: block;
+      width: max-content;
+      max-width: min(100%, 90vw);
+      margin: 0 0 22px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: .06em;
+      text-wrap: pretty;
+    }
+    .hero-sub {
+      max-width: 54ch;
+      margin: 28px 0 0;
+      font-size: 19px;
+      color: var(--ink-k);
+      font-weight: 600;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 36px 0 0;
+    }
+    .hero .btn-ink { background: var(--paper); }
+    .hero-note {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-k);
+    }
+
+    /* tira de tickets del flujo de reserva */
+    .stub-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 64px -2px 0;
+      border: 2px solid var(--ink-k);
+      border-bottom: none;
+      background: var(--paper);
+    }
+    .stub {
+      padding: 22px 20px 26px;
+      border-right: 2px dashed var(--ink-k);
+      position: relative;
+      transition: transform var(--t);
+    }
+    .stub:last-child { border-right: none; background: var(--ink-k); }
+    .stub:hover { transform: translateY(-4px); }
+    /* troquel: perforaciones en las uniones de la tira */
+    .stub:not(:last-child)::before,
+    .stub:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -9px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--ink-k);
+      z-index: 2;
+    }
+    .stub:not(:last-child)::before { top: -9px; background: var(--ink-y); }
+    .stub:not(:last-child)::after  { bottom: -9px; background: var(--paper); }
+    .stub-step {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      color: var(--gold-text);
+      line-height: 1;
+    }
+    .stub:last-child .stub-step { color: var(--ink-y); }
+    .stub h2 { font-size: 15px; margin: 10px 0 6px; }
+    .stub:last-child h3 { color: var(--paper); }
+    .stub p { font-size: 13.5px; line-height: 1.45; }
+    .stub:last-child p { color: var(--paper-deep); }
+    .strip-caption {
+      background: var(--paper);
+      border: 2px solid var(--ink-k);
+      margin: 0 -2px 56px;
+      padding: 15px 20px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+    }
+
+    /* ── secciones ── */
+    section { padding: 96px 0; }
+    .sec-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      max-width: 20ch;
+      margin-bottom: 18px;
+    }
+    .sec-sub {
+      font-size: 18px;
+      max-width: 58ch;
+      margin-bottom: 56px;
+    }
+
+    /* ── el problema: recibo del caos ── */
+    .problema { background: var(--paper); }
+    .antes-despues {
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .recibo {
+      background: #FFFDF4;
+      border: 2px solid var(--ink-k);
+      box-shadow: var(--shadow-reg);
+      padding: 26px 24px 0;
+      transform: rotate(-1.2deg);
+    }
+    .recibo-head {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--ink-k);
+      border-bottom: 2px dashed var(--ink-k);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+    .chat-line {
+      font-size: 14px;
+      padding: 7px 12px;
+      border: 1.5px solid var(--ink-k);
+      border-radius: 12px 12px 12px 3px;
+      margin-bottom: 9px;
+      max-width: 90%;
+      background: transparent;
+      color: var(--ink-body);
+    }
+    .chat-line.own {
+      margin-left: auto;
+      border-radius: 12px 12px 3px 12px;
+      background: var(--ink-y);
+      color: var(--ink-k);
+      font-weight: 600;
+    }
+    .chat-hora {
+      font-size: 11px;
+      color: var(--gold-text);
+      font-weight: 700;
+      text-align: right;
+      display: block;
+    }
+    .recibo-corte {
+      margin: 14px -24px 0;
+      height: 18px;
+      background:
+        linear-gradient(-45deg, transparent 12px, #FFFDF4 0) left/16px 18px repeat-x;
+      filter: drop-shadow(0 3px 2px rgba(0,0,0,.12));
+    }
+    .recibo-total {
+      border-top: 2px dashed var(--ink-k);
+      padding: 12px 0 6px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: var(--ink-k);
+      display: flex;
+      justify-content: space-between;
+    }
+    .problema-copy h2 { margin-bottom: 22px; }
+    .problema-copy p { max-width: 52ch; margin-bottom: 18px; }
+    .vs-list { list-style: none; margin: 34px 0 0; }
+    .vs-list li {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 2px solid var(--ink-k);
+      border-bottom: none;
+      font-size: 14.5px;
+    }
+    .vs-list li:last-child { border-bottom: 2px solid var(--ink-k); }
+    .vs-list .antes {
+      padding: 12px 16px;
+      border-right: 2px solid var(--ink-k);
+      color: var(--ink-body);
+      text-decoration: line-through;
+      text-decoration-color: var(--ink-y-deep);
+      text-decoration-thickness: 2px;
+    }
+    .vs-list .despues {
+      padding: 12px 16px;
+      background: var(--ink-y);
+      color: var(--ink-k);
+      font-weight: 700;
+    }
+
+    /* ── cómo funciona: sección de tinta negra ── */
+    .pasos {
+      background: var(--ink-k);
+      border-top: 2px solid var(--ink-k);
+      border-bottom: 2px solid var(--ink-k);
+    }
+    .pasos .sec-title { color: var(--paper); }
+    .pasos .sec-title .misreg::before { color: var(--ink-y); }
+    .pasos .sec-sub { color: var(--paper-deep); }
+    .pasos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--paper);
+      border: 2px solid var(--paper);
+    }
+    .paso {
+      background: var(--ink-k);
+      padding: 26px 22px 30px;
+    }
+    .paso-num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1;
+      color: var(--ink-y);
+    }
+    .paso h3 { color: var(--paper); font-size: 16px; margin: 12px 0 8px; }
+    .paso p { color: var(--paper-deep); font-size: 14px; line-height: 1.5; }
+    .pasos-cta { margin-top: 44px; }
+    .pasos .btn-ink { box-shadow: 5px 5px 0 var(--ink-y-deep); }
+    .pasos .btn-ink:hover { box-shadow: 8px 8px 0 var(--ink-y-deep); }
+
+    /* ── funcionalidades: lista de servicios con puntos líder ── */
+    .funcs { background: var(--paper); }
+    .func-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 72px;
+    }
+    .func {
+      padding: 20px 0;
+      border-bottom: 2px dotted var(--ink-k);
+    }
+    .func-name {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 15.5px;
+      color: var(--ink-k);
+    }
+    .func-name::after {
+      content: '';
+      flex: 1;
+      border-bottom: 2px dotted var(--ink-y-deep);
+      transform: translateY(-3px);
+    }
+    .func p { font-size: 14.5px; margin-top: 7px; max-width: 46ch; }
+    .func strong { color: var(--ink-k); }
+
+    /* ── demo agenda: campo amarillo ── */
+    .demo {
+      background: var(--ink-y);
+      border-top: 2px solid var(--ink-k);
+      border-bottom: 2px solid var(--ink-k);
+      overflow: hidden;
+    }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr minmax(300px, 440px);
+      gap: 72px;
+      align-items: center;
+    }
+    .demo-copy .sec-sub { margin-bottom: 30px; color: var(--ink-k); font-weight: 600; }
+    .agenda-card {
+      background: var(--paper);
+      border: 2px solid var(--ink-k);
+      box-shadow: 7px 7px 0 var(--ink-y-deep);
+      transform: rotate(1deg);
+    }
+    .agenda-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--ink-k);
+      padding: 14px 18px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: var(--ink-k);
+    }
+    .agenda-head small {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-size: 10.5px;
+      letter-spacing: .1em;
+      color: var(--gold-text);
+    }
+    .turno {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 18px;
+      border-bottom: 1.5px dashed rgba(17,17,17,.35);
+      font-size: 14px;
+    }
+    .turno:last-of-type { border-bottom: none; }
+    .turno-hora {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--ink-k);
+      min-width: 46px;
+      font-variant-numeric: tabular-nums;
+    }
+    .turno-info { flex: 1; min-width: 0; }
+    .turno-info b { color: var(--ink-k); display: block; font-size: 14px; }
+    .turno-info span { font-size: 12.5px; }
+    .sello {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border: 1.5px solid currentColor;
+      transform: rotate(-3deg);
+      white-space: nowrap;
+    }
+    .sello.ok   { color: var(--success); }
+    .sello.wait { color: var(--ink-k); background: var(--ink-y); border-color: var(--ink-k); }
+    .sello.done { color: var(--ink-body); opacity: .6; }
+
+    /* ── precios: etiquetas de tarifa ── */
+    .precios { background: var(--paper); }
+    .tarifas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      align-items: start;
+    }
+    .tarifa {
+      background: #FFFDF4;
+      border: 2px solid var(--ink-k);
+      padding: 30px 26px;
+      position: relative;
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .tarifa:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink-k); }
+    .tarifa.pro {
+      background: var(--ink-y);
+      box-shadow: var(--shadow-reg);
+      transform: rotate(-.6deg);
+    }
+    .tarifa.pro:hover { transform: rotate(-.6deg) translate(-2px,-2px); box-shadow: 8px 8px 0 var(--ink-k); }
+    .stamp {
+      position: absolute;
+      top: -16px;
+      right: 18px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--ink-k);
+      color: var(--ink-y);
+      padding: 6px 12px;
+      transform: rotate(3deg);
+    }
+    .tarifa h3 { font-size: 20px; }
+    .tarifa-precio {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 42px;
+      color: var(--ink-k);
+      line-height: 1.1;
+      margin: 12px 0 2px;
+      letter-spacing: -.02em;
+    }
+    .tarifa-precio small {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .tarifa-para { font-size: 13.5px; margin-bottom: 18px; }
+    .tarifa.pro .tarifa-para { color: var(--ink-k); }
+    .tarifa ul {
+      list-style: none;
+      margin: 0 0 24px;
+      font-size: 14px;
+    }
+    .tarifa li {
+      padding: 7px 0 7px 26px;
+      border-bottom: 1.5px dotted rgba(17,17,17,.3);
+      position: relative;
+    }
+    .tarifa li::before {
+      content: '';
+      position: absolute;
+      left: 2px; top: 13px;
+      width: 12px; height: 7px;
+      border-left: 2.5px solid var(--ink-y-deep);
+      border-bottom: 2.5px solid var(--ink-y-deep);
+      transform: rotate(-45deg);
+    }
+    .tarifa.pro li::before { border-color: var(--ink-k); }
+    /* Antes opacity .45 (2,47:1, falla WCAG AA). #696352 sobre #FFFDF4 da 5,9:1. */
+    .tarifa li.no { color: #696352; }
+    .tarifa li.no::before {
+      border: none;
+      width: 12px; height: 2.5px;
+      background: #696352;
+      top: 16px;
+      transform: none;
+    }
+    .tarifa .btn { width: 100%; text-align: center; padding: 13px 10px; font-size: 13.5px; }
+    .tarifa.pro .btn-ink { background: var(--paper); }
+    .precios-nota {
+      margin-top: 40px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gold-text);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      text-align: center;
+    }
+
+    /* ── cierre: tinta negra ── */
+    .cierre {
+      background: var(--ink-k);
+      text-align: center;
+      padding: 110px 0;
+      overflow: hidden;
+    }
+    .cierre-orn {
+      position: absolute;
+      right: -30px;
+      top: -46px;
+      opacity: .9;
+    }
+    .demo-orn {
+      position: absolute;
+      right: -28px;
+      top: -48px;
+      transform: rotate(14deg);
+    }
+    @media (max-width: 860px) {
+      .cierre-orn { width: 110px; height: 110px; right: -24px; }
+      .demo-orn { display: none; }
+    }
+    .cierre h2 {
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      color: var(--paper);
+      margin: 0 auto 26px;
+      max-width: 16ch;
+    }
+    .cierre h2 .misreg::before { color: var(--ink-y); }
+    .cierre p { color: var(--paper-deep); font-size: 18px; max-width: 48ch; margin: 0 auto 36px; }
+    .cierre .btn-ink { box-shadow: 5px 5px 0 var(--ink-y-deep); font-size: 17px; padding: 18px 40px; }
+    .cierre .btn-ink:hover { box-shadow: 9px 9px 0 var(--ink-y-deep); }
+    .cierre p.cierre-nota { margin: 48px auto 0; font-size: 13.5px; color: var(--paper-deep); font-weight: 600; }
+
+    /* ── footer ── */
+    footer {
+      background: var(--paper);
+      border-top: 2px solid var(--ink-k);
+      padding: 44px 0;
+    }
+    .foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .foot-logo { display: flex; align-items: center; gap: 10px; }
+    .foot-logo img { height: 30px; width: auto; }
+    .foot-logo b {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: .04em;
+      color: var(--ink-k);
+    }
+    .foot nav ul { display: flex; gap: 22px; list-style: none; flex-wrap: wrap; }
+    .foot nav a {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--ink-k);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink-y-deep);
+      cursor: pointer;
+    }
+    .foot nav a:hover { background: var(--ink-y); }
+    .foot-meta { font-size: 13px; width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .foot-meta a { font-weight: 700; }
+
+    /* ── responsive ── */
+    @media (max-width: 1024px) {
+      .func-cols { gap: 0 48px; }
+      .antes-despues { gap: 44px; }
+    }
+    @media (max-width: 860px) {
+      section { padding: 72px 0; }
+      .mast { flex-wrap: wrap; row-gap: 10px; }
+      .mast nav { order: 3; width: 100%; border-top: 2px dashed var(--ink-k); padding-top: 10px; }
+      .mast nav ul { gap: 18px; }
+      .mast nav a { font-size: 12px; }
+      .stub:not(:last-child)::before, .stub:not(:last-child)::after { display: none; }
+      .stub-strip { grid-template-columns: 1fr 1fr; }
+      .stub:nth-child(2) { border-right: none; }
+      .stub:nth-child(1), .stub:nth-child(2) { border-bottom: 2px dashed var(--ink-k); }
+      .pasos-grid { grid-template-columns: 1fr 1fr; }
+      .antes-despues { grid-template-columns: 1fr; }
+      .recibo { max-width: 420px; }
+      .func-cols { grid-template-columns: 1fr; }
+      .demo-grid { grid-template-columns: 1fr; gap: 48px; }
+      .agenda-card { max-width: 460px; }
+      .tarifas { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+    }
+    @media (max-width: 520px) {
+      body { font-size: 15.5px; }
+      .stub-strip, .pasos-grid { grid-template-columns: 1fr; }
+      .stub { border-right: none; border-bottom: 2px dashed var(--ink-k); }
+      .stub:last-child { border-bottom: none; }
+      .vs-list li { grid-template-columns: 1fr; }
+      .vs-list .antes { border-right: none; border-bottom: 2px dashed var(--ink-k); }
+      .hero { padding-top: 52px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .misreg::before { transform: translate(6px, 5px); }
+    }
+  </style>
+  <style>
+    /* ── preguntas frecuentes (solo páginas de rubro) ── */
+    .faq { background: var(--paper); border-top: 2px solid var(--ink-k); }
+    .faq .sec-title { margin-bottom: 40px; }
+    .faq-list { max-width: 820px; border-top: 2px solid var(--ink-k); }
+    .faq details { border-bottom: 2px dotted var(--ink-y-deep); }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 0;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary h3 { font-size: 17px; font-weight: 700; line-height: 1.25; letter-spacing: 0; margin: 0; }
+    .faq summary::after {
+      content: '+';
+      flex-shrink: 0;
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border: 2px solid var(--ink-k);
+      font: 800 20px/1 'Poppins', sans-serif;
+      color: var(--ink-k);
+      transition: background var(--t, 200ms);
+    }
+    .faq details[open] summary::after { content: '–'; background: var(--ink-y); }
+    .faq details p { padding: 0 52px 24px 0; max-width: 64ch; }
+    .cierre-otros { margin-top: 28px; color: var(--paper-deep); font-size: 15px; }
+    .cierre-otros a { color: var(--ink-y); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    @media (max-width: 520px) {
+      .faq summary h3 { font-size: 15.5px; }
+      .faq details p { padding-right: 0; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="mast">
+    <a href="/" class="mast-logo" aria-label="Limonada — inicio">
+      <img src="/logo-limonada-header.webp" width="62" height="34" alt="" />
+      LIMONADA
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#precios">Precios</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-ink" href="https://app.limonada.online">Empezar gratis</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ════ HERO ════ -->
+<section class="hero" aria-labelledby="h1">
+  <div class="container">
+    <!-- El kicker lleva la búsqueda que ataca esta página ("agenda de turnos para barberías");
+         el display, el slogan del rubro. -->
+    <h1 id="h1">
+      <span class="hero-kicker">Agenda de turnos para barberías</span>
+      <span class="misreg" data-text="Vos cortás."><span>Vos cortás.</span></span><br />
+      <span class="misreg" data-text="El link agenda."><span>El link agenda.</span></span>
+    </h1>
+    <p class="hero-sub">Tus clientes eligen el corte, el barbero y el horario desde un link, a cualquier hora. Vos no soltás la máquina para contestar el WhatsApp.</p>
+    <div class="hero-actions">
+      <a class="btn btn-ink" href="https://app.limonada.online">Empezar gratis · 14 días</a>
+      <span class="hero-note">Sin tarjeta de crédito</span>
+    </div>
+
+    <div class="stub-strip" role="list" aria-label="Así reserva tu cliente">
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">1</div>
+        <h2>Elige el corte</h2>
+        <p>Corte, fade, barba o corte + barba, con duración y precio.</p>
+      </div>
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">2</div>
+        <h2>Elige el barbero</h2>
+        <p>El de siempre, o "cualquiera disponible".</p>
+      </div>
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">3</div>
+        <h2>Elige día y hora</h2>
+        <p>Solo ve los horarios en los que hay silla libre.</p>
+      </div>
+      <div class="stub" role="listitem">
+        <div class="stub-step" aria-hidden="true">4</div>
+        <h2>Turno confirmado</h2>
+        <p>Le llega la confirmación. A vos, el turno en la agenda.</p>
+      </div>
+    </div>
+    <p class="strip-caption">Así reserva tu cliente — sin escribirte, aunque sean las doce de la noche</p>
+  </div>
+</section>
+
+<!-- ════ EL PROBLEMA ════ -->
+<section class="problema" aria-labelledby="h2-problema">
+  <div class="container">
+    <div class="antes-despues">
+      <figure class="recibo" aria-label="Ejemplo ilustrativo: pedir un turno en una barbería por chat">
+        <figcaption class="recibo-head">Un turno en la barbería, por chat · ejemplo</figcaption>
+        <p class="chat-line">Buenas! Tenés lugar ahora?</p>
+        <p class="chat-line own">Ahora no, estoy cortando. A las 18?</p>
+        <p class="chat-line">Uh no llego. Y a las 19?</p>
+        <p class="chat-line own">19 con Nico puede ser</p>
+        <p class="chat-line">Con Lucas no?</p>
+        <p class="chat-line own">Lucas termina 18:30 😕</p>
+        <p class="chat-line">Bueno, te aviso</p>
+        <span class="chat-hora">…la silla de las 19 quedó vacía</span>
+        <div class="recibo-total"><span>Total:</span><span>0 turnos, 7 mensajes</span></div>
+        <div class="recibo-corte" aria-hidden="true"></div>
+      </figure>
+
+      <div class="problema-copy">
+        <h2 class="sec-title" id="h2-problema">El WhatsApp no corta el pelo</h2>
+        <p>En una barbería los turnos son cortos y seguidos: cada mensaje que contestás es con la máquina en la mano. El que pregunta "¿tenés lugar?" a la noche espera hasta mañana, y el que no avisa deja un hueco que ya nadie llena.</p>
+        <p><strong>Con Limonada el cliente ve los horarios libres y se anota solo.</strong> Vos compartís el link una vez y seguís cortando.</p>
+        <ul class="vs-list">
+          <li><span class="antes">"¿Tenés lugar ahora?" a toda hora</span><span class="despues">Horarios libres a la vista, 24/7</span></li>
+          <li><span class="antes">"¿Con Lucas puede ser?"</span><span class="despues">El cliente elige su barbero</span></li>
+          <li><span class="antes">Cuaderno en el mostrador</span><span class="despues">Agenda por barbero en el celular</span></li>
+          <li><span class="antes">El que no viene y no avisa</span><span class="despues">Recordatorio por email antes del turno</span></li>
+          <li><span class="antes">Comisiones con calculadora</span><span class="despues">La comisión de cada barbero, calculada</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CÓMO FUNCIONA ════ -->
+<section class="pasos" id="como-funciona" aria-labelledby="h2-pasos">
+  <div class="container">
+    <h2 class="sec-title" id="h2-pasos"><span class="misreg" data-text="Tu barbería, en diez minutos"><span>Tu barbería, en diez minutos</span></span></h2>
+    <p class="sec-sub">De registrarte a tener el link andando, en menos de diez minutos. Sin instalar nada.</p>
+    <div class="pasos-grid">
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">1</div>
+        <h3>Cargá tus cortes</h3>
+        <p>Corte, fade, barba, corte + barba: cada uno con su duración y su precio.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">2</div>
+        <h3>Sumá a tus barberos</h3>
+        <p>Cada uno con sus días, sus horarios y los servicios que hace.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">3</div>
+        <h3>Poné el link en la bio</h3>
+        <p>app.limonada.online/tu-barberia en Instagram y donde te escriban tus clientes.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num" aria-hidden="true">4</div>
+        <h3>Seguí cortando</h3>
+        <p>Los turnos entran solos. Confirmás y completás desde el celular.</p>
+      </div>
+    </div>
+    <div class="pasos-cta">
+      <a class="btn btn-ink" href="https://app.limonada.online">Crear el link de mi barbería</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FUNCIONALIDADES ════ -->
+<section class="funcs" id="funcionalidades" aria-labelledby="h2-funcs">
+  <div class="container">
+    <h2 class="sec-title" id="h2-funcs">Lo que usa una barbería, y nada más</h2>
+    <p class="sec-sub">Sin funciones que sobran ni menús eternos: la simplicidad es el producto.</p>
+    <div class="func-cols">
+      <div class="func">
+        <div class="func-name">Cada servicio, su tiempo</div>
+        <p>Un corte no dura lo mismo que corte + barba. Cada servicio ocupa <strong>su duración real</strong> en la agenda y los turnos no se pisan.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">El barbero que elige el cliente</div>
+        <p>El que tiene clientela fija la conserva. Y con <strong>"cualquiera disponible"</strong> el próximo hueco se llena con quien esté libre.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Recordatorios por email</div>
+        <p>Confirmación al reservar y <strong>recordatorio antes del turno</strong>, con la anticipación que definas. En Pro, doble recordatorio.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Comisiones por barbero</div>
+        <p>Por porcentaje, fijas o mixtas. A fin de mes <strong>el número de cada barbero ya está</strong>, sin calculadora.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Los que entran sin turno</div>
+        <p>El que pasa por la puerta o te escribe igual: lo cargás en la agenda <strong>en tres clics</strong> y ese horario deja de aparecer en el link.</p>
+      </div>
+      <div class="func">
+        <div class="func-name">Más de una sucursal</div>
+        <p>Varias barberías desde un solo panel, cada una con sus horarios, sus sillas y sus barberos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ DEMO AGENDA ════ -->
+<section class="demo" aria-labelledby="h2-demo">
+  <div class="container">
+    <div class="demo-grid">
+      <div class="demo-copy">
+        <h2 class="sec-title" id="h2-demo">El sábado, de un vistazo</h2>
+        <p class="sec-sub">Quién viene, a qué hora, con qué barbero y qué se hace. Los recordatorios salen solos, sin que toques nada.</p>
+        <a class="btn btn-ink" href="https://app.limonada.online">Ver mi agenda así</a>
+      </div>
+      <svg class="demo-orn" width="130" height="130" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="45" fill="#F8F1DE" stroke="#111111" stroke-width="3"/>
+        <circle cx="50" cy="50" r="34" fill="none" stroke="#111111" stroke-width="2"/>
+        <g stroke="#111111" stroke-width="2.5">
+          <line x1="50" y1="18" x2="50" y2="82"/>
+          <line x1="18" y1="50" x2="82" y2="50"/>
+          <line x1="27.4" y1="27.4" x2="72.6" y2="72.6"/>
+          <line x1="72.6" y1="27.4" x2="27.4" y2="72.6"/>
+        </g>
+        <circle cx="50" cy="50" r="7" fill="#D4A800" stroke="#111111" stroke-width="2"/>
+      </svg>
+      <figure class="agenda-card" aria-label="Demo ilustrativa de la agenda de una barbería">
+        <figcaption class="agenda-head">
+          Agenda · Sábado
+          <small>Demo ilustrativa</small>
+        </figcaption>
+        <div class="turno">
+          <span class="turno-hora">09:30</span>
+          <span class="turno-info"><b>Tomás R.</b><span>Fade · Nico</span></span>
+          <span class="sello done">Completado</span>
+        </div>
+        <div class="turno">
+          <span class="turno-hora">10:00</span>
+          <span class="turno-info"><b>Rodrigo M.</b><span>Corte + barba · Lucas</span></span>
+          <span class="sello ok">Confirmado</span>
+        </div>
+        <div class="turno">
+          <span class="turno-hora">10:15</span>
+          <span class="turno-info"><b>Joaquín S.</b><span>Arreglo de barba · Nico</span></span>
+          <span class="sello wait">Pendiente</span>
+        </div>
+        <div class="turno">
+          <span class="turno-hora">11:00</span>
+          <span class="turno-info"><b>Martín P.</b><span>Fade + diseño · Lucas</span></span>
+          <span class="sello ok">Confirmado</span>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PRECIOS ════ -->
+<section class="precios" id="precios" aria-labelledby="h2-precios">
+  <div class="container">
+    <h2 class="sec-title" id="h2-precios">¿Qué plan le sirve a tu barbería?</h2>
+    <p class="sec-sub">14 días gratis, sin tarjeta de crédito. Cancelás cuando quieras.</p>
+    <div class="tarifas">
+      <div class="tarifa">
+        <h3>Starter</h3>
+        <div class="tarifa-precio">Gratis</div>
+        <p class="tarifa-para">Para el barbero que trabaja solo y está arrancando.</p>
+        <ul>
+          <li>1 barbero</li>
+          <li>Hasta 60 turnos por mes</li>
+          <li>Agenda digital</li>
+          <li>Link de reservas público</li>
+          <li>Notificaciones automáticas</li>
+          <li class="no">Reportes avanzados</li>
+        </ul>
+        <a class="btn btn-line" href="https://app.limonada.online/?plan=free">Empezar gratis</a>
+      </div>
+      <div class="tarifa pro">
+        <span class="stamp">Más popular</span>
+        <h3>Pro</h3>
+        <div class="tarifa-precio">$24.900<small>/mes</small></div>
+        <p class="tarifa-para">Para la barbería de hasta tres sillas, con la agenda llena.</p>
+        <ul>
+          <li>Hasta 3 barberos</li>
+          <li>Turnos ilimitados</li>
+          <li>Todo lo del plan Starter</li>
+          <li>Reportes avanzados</li>
+          <li>Comisiones por barbero</li>
+          <li>Gestión de equipo</li>
+        </ul>
+        <a class="btn btn-ink" href="https://app.limonada.online/?plan=pro">Probar 14 días gratis</a>
+      </div>
+      <div class="tarifa">
+        <h3>Business</h3>
+        <div class="tarifa-precio">$54.900<small>/mes</small></div>
+        <p class="tarifa-para">Para más sillas o más de una sucursal.</p>
+        <ul>
+          <li>Barberos ilimitados</li>
+          <li>Todo lo del plan Pro</li>
+          <li>Multi-sucursal</li>
+          <li>Soporte prioritario</li>
+          <li>Onboarding personalizado</li>
+        </ul>
+        <a class="btn btn-line" href="https://app.limonada.online/?plan=business">Probar 14 días gratis</a>
+      </div>
+    </div>
+    <p class="precios-nota">Precios en pesos argentinos: sin sorpresas en dólares</p>
+  </div>
+</section>
+
+<!-- ════ PREGUNTAS FRECUENTES ════
+     Las respuestas tienen que coincidir con el FAQPage del JSON-LD del <head>. -->
+<section class="faq" id="preguntas" aria-labelledby="h2-faq">
+  <div class="container">
+    <h2 class="sec-title" id="h2-faq">Lo que pregunta todo barbero</h2>
+    <div class="faq-list">
+      <details>
+        <summary><h3>¿Mis clientes se tienen que bajar una app?</h3></summary>
+        <p>No. Reservan desde el link de tu barbería, en el navegador del celular, sin registro obligatorio. Eligen el corte, el barbero y el horario, y listo.</p>
+      </details>
+      <details>
+        <summary><h3>¿Puedo seguir atendiendo a los que entran sin turno?</h3></summary>
+        <p>Sí. La agenda es tuya: al que entra por la puerta o te escribe igual lo cargás en tres clics, y ese horario deja de aparecer en el link para el resto.</p>
+      </details>
+      <details>
+        <summary><h3>¿Cada barbero tiene su propia agenda?</h3></summary>
+        <p>Sí. Cada barbero tiene sus días, sus horarios y los servicios que hace, y la agenda se puede ver por barbero. El cliente elige con quién se atiende o reserva con cualquiera disponible.</p>
+      </details>
+      <details>
+        <summary><h3>¿Qué pasa con los clientes que no vienen?</h3></summary>
+        <p>Limonada le manda un email de confirmación al reservar y un recordatorio antes del turno, con la anticipación que definas. No hace milagros, pero el que se olvidaba ahora se entera.</p>
+      </details>
+      <details>
+        <summary><h3>¿Cuánto cuesta para una barbería?</h3></summary>
+        <p>Si trabajás solo, el plan Starter es gratis: un barbero y hasta 60 turnos por mes. Pro cuesta $24.900 por mes, para hasta tres barberos y turnos ilimitados. Business cuesta $54.900 por mes, con barberos ilimitados y varias sucursales. Los precios son en pesos y los planes pagos tienen 14 días de prueba sin tarjeta.</p>
+      </details>
+      <details>
+        <summary><h3>¿Cuánto tardo en tenerlo andando?</h3></summary>
+        <p>Menos de diez minutos. Cargás el nombre de la barbería, tus cortes, tus barberos y los horarios, y el link queda listo para pegar en la bio de Instagram.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CIERRE ════ -->
+<section class="cierre" aria-labelledby="h2-cierre">
+  <div class="container">
+    <svg class="cierre-orn" width="170" height="170" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <pattern id="ht" width="7" height="7" patternUnits="userSpaceOnUse">
+          <circle cx="3.5" cy="3.5" r="1.6" fill="#111111"/>
+        </pattern>
+      </defs>
+      <circle cx="45" cy="45" r="38" fill="#D4A800"/>
+      <circle cx="45" cy="45" r="38" fill="url(#ht)" opacity=".55"/>
+      <circle cx="55" cy="55" r="38" fill="none" stroke="#F5C518" stroke-width="2.5"/>
+    </svg>
+    <h2 id="h2-cierre"><span class="misreg" data-text="Soltá el celular."><span>Soltá el celular.</span></span></h2>
+    <p>Cargás tus cortes y tus barberos en diez minutos, y el link empieza a tomar turnos hoy mismo.</p>
+    <a class="btn btn-ink" href="https://app.limonada.online">Empezar gratis · 14 días</a>
+    <p class="cierre-nota">Sin tarjeta de crédito · Cancelás cuando quieras</p>
+    <p class="cierre-otros">¿Peluquería, estética o consultorio? <a href="/">Limonada también es para vos</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <div class="foot-logo">
+      <img src="/logo-limonada-header.webp" width="62" height="34" alt="" />
+      <b>LIMONADA</b>
+    </div>
+    <nav aria-label="Navegación del pie">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="https://app.limonada.online">Entrar a la app</a></li>
+        <li><a href="mailto:soporte@limonada.online">Soporte</a></li>
+      </ul>
+    </nav>
+    <div class="foot-meta">
+      <span>© 2026 Limonada · un producto de <a href="https://soluway.com.ar">Soluway</a></span>
+      <span><a href="https://app.limonada.online/legal/terminos">Términos</a> · <a href="https://app.limonada.online/legal/privacidad">Privacidad</a></span>
+      <span>Hecho en Argentina</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
