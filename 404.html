@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página no encontrada | Limonada</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta name="theme-color" content="#F5C518" />
+  <!-- GitHub Pages sirve este archivo con status 404 para cualquier ruta que no existe.
+       Rutas absolutas: se muestra en cualquier profundidad (/a/b/c). -->
+  <style>
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(/fonts/open-sans-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 800; font-display: swap; src: url(/fonts/poppins-800-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/poppins-700-latin.woff2) format('woff2'); }
+    :root { --paper: #F8F1DE; --ink-y: #F5C518; --ink-y-deep: #D4A800; --ink-k: #111111; --ink-body: #3B3629; --gold-text: #7A5A06; --t: 200ms cubic-bezier(.22,.9,.35,1); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font: 400 16.5px/1.6 'Open Sans', sans-serif; color: var(--ink-body); background: var(--paper); min-height: 100vh; display: flex; flex-direction: column; }
+    header { border-bottom: 2px solid var(--ink-k); padding: 16px 24px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font: 800 20px/1 'Poppins', sans-serif; color: var(--ink-k); text-decoration: none; }
+    main { flex: 1; display: grid; place-items: center; padding: 72px 24px; }
+    .hoja { max-width: 560px; width: 100%; background: #FFFDF4; border: 2px solid var(--ink-k); box-shadow: 7px 7px 0 var(--ink-k); transform: rotate(-.8deg); padding: 40px 32px; }
+    .num { font: 800 clamp(4rem, 18vw, 7rem)/.9 'Poppins', sans-serif; color: var(--ink-k); text-shadow: 6px 5px 0 var(--ink-y); letter-spacing: -.02em; }
+    h1 { font: 800 clamp(1.6rem, 6vw, 2.2rem)/1 'Poppins', sans-serif; text-transform: uppercase; color: var(--ink-k); margin: 18px 0 14px; letter-spacing: -.01em; }
+    p { margin-bottom: 26px; }
+    .sugerencia { border-top: 2px dashed var(--ink-k); padding-top: 20px; margin-top: 4px; }
+    .sugerencia[hidden] { display: none; }
+    .sugerencia a { color: var(--ink-k); font-weight: 700; text-decoration: underline; text-decoration-color: var(--ink-y-deep); text-decoration-thickness: 2px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+    .btn { display: inline-block; font: 700 15px/1 'Poppins', sans-serif; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; color: var(--ink-k); background: var(--ink-y); padding: 15px 30px; border: 2px solid var(--ink-k); box-shadow: 5px 5px 0 var(--ink-k); transition: transform var(--t), box-shadow var(--t); }
+    .btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink-k); }
+    .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink-k); }
+    :focus-visible { outline: 3px solid var(--ink-k); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+  </style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/"><img src="/logo-limonada-header.webp" width="62" height="34" alt="" />LIMONADA</a>
+</header>
+<main>
+  <div class="hoja">
+    <div class="num" aria-hidden="true">404</div>
+    <h1>Esta página no existe</h1>
+    <p>Puede que el link esté mal escrito o que la página ya no esté. Desde el inicio encontrás todo lo de Limonada.</p>
+    <a class="btn" href="/">Ir al inicio</a>
+    <p class="sugerencia" id="sugerencia" hidden>
+      ¿Buscabas reservar un turno? Las páginas de reserva están en otra dirección. Probá con
+      <a id="sugerencia-link" href="https://app.limonada.online/">app.limonada.online</a>.
+    </p>
+  </div>
+</main>
+<script>
+  // Si la ruta parece el nombre de un negocio (limonada.online/barberia-el-rayo), sugerir su página
+  // de reservas: la gente escribe limonada.online/{slug} y el link real es app.limonada.online/{slug}.
+  (function () {
+    var seg = location.pathname.split("/").filter(Boolean);
+    if (seg.length !== 1) return;
+    var slug = decodeURIComponent(seg[0]).toLowerCase();
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return;
+    var a = document.getElementById("sugerencia-link");
+    a.href = "https://app.limonada.online/" + slug;
+    a.textContent = "app.limonada.online/" + slug;
+    document.getElementById("sugerencia").hidden = false;
+  })();
+</script>
+</body>
+</html>
